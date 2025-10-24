@@ -6,8 +6,8 @@ const roadmapPhases = [
   {
     phase: "Phase 1",
     title: "Foundation & Launch",
-    period: "Q4 2024 - Q1 2025",
-    status: "completed",
+    period: "Q1 - Q2 2026",
+    status: "upcoming",
     items: [
       "Smart contract development & audit",
       "Token sale launch",
@@ -18,8 +18,8 @@ const roadmapPhases = [
   {
     phase: "Phase 2", 
     title: "Platform Development",
-    period: "Q1 - Q2 2025",
-    status: "active",
+    period: "Q2 - Q3 2026",
+    status: "upcoming",
     items: [
       "DAO governance implementation",
       "Project funding mechanism",
@@ -30,8 +30,8 @@ const roadmapPhases = [
   {
     phase: "Phase 3",
     title: "Ecosystem Expansion",
-    period: "Q2 - Q3 2025",
-    status: "upcoming",
+    period: "Q3 - Q4 2026",
+    status: "future",
     items: [
       "Cross-chain integration", 
       "NFT marketplace for cause awareness",
@@ -42,7 +42,7 @@ const roadmapPhases = [
   {
     phase: "Phase 4",
     title: "Global Impact",
-    period: "Q3 2025 & Beyond",
+    period: "Q4 2026 & Beyond",
     status: "future",
     items: [
       "100+ funded projects milestone",

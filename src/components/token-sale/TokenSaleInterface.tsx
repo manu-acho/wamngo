@@ -181,8 +181,8 @@ export default function TokenSaleInterface() {
               </div>
               
               <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Time Remaining</span>
-                <span className="font-semibold text-orange-600 text-sm sm:text-base">14 days</span>
+                <span className="text-xs sm:text-sm text-gray-600">Launch Timeline</span>
+                <span className="font-semibold text-purple-600 text-sm sm:text-base">Q1 2026</span>
               </div>
             </div>
           </CardContent>
@@ -234,7 +234,7 @@ export default function TokenSaleInterface() {
             <ul className="space-y-2 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 mt-0.5">🔒</span>
-                <span>Smart contract audited by CertiK</span>
+                <span>Smart contract security audit planned</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 mt-0.5">🔒</span>

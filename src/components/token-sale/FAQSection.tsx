@@ -18,11 +18,11 @@ const faqData = [
   },
   {
     question: "When will tokens be distributed?",
-    answer: "Tokens will be distributed after the Token Generation Event (TGE), which is scheduled for Q1 2025. All purchasers will receive their tokens directly to their connected wallet addresses."
+    answer: "Tokens will be distributed after the Token Generation Event (TGE), which is scheduled for Q2 2026. All purchasers will receive their tokens directly to their connected wallet addresses."
   },
   {
     question: "What blockchains does WAM support?",
-    answer: "WAM tokens are built on Ethereum mainnet with plans for cross-chain expansion to Polygon, Base, Optimism, and Arbitrum to ensure low transaction fees and broad accessibility."
+    answer: "WAM tokens will be deployed on Base network, Coinbase's Layer 2 solution built on Optimism. This ensures low transaction fees, fast processing, and seamless integration with the broader Ethereum ecosystem while maintaining security and decentralization."
   },
   {
     question: "How does the governance system work?",
@@ -34,7 +34,7 @@ const faqData = [
   },
   {
     question: "Is the smart contract audited?",
-    answer: "Yes, our smart contracts have been audited by CertiK, a leading blockchain security firm. The audit report will be published before the TGE, and we maintain a multi-signature treasury for additional security."
+    answer: "Our smart contracts will undergo comprehensive security audits by reputable blockchain security firms before deployment. The audit reports will be published before the TGE, and we maintain a multi-signature treasury for additional security."
   },
   {
     question: "Can I stake my WAM tokens?",
