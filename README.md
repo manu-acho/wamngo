@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WAM - Women Against Mutilations Website
 
-## Getting Started
+A modern, responsive website for WAM (Women Against Mutilations), an NGO dedicated to fighting female genital mutilation and supporting affected women.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Modern Design**: Clean, professional interface built with Next.js 15 and Tailwind CSS v4
+- **Responsive**: Fully responsive design that works on all devices
+- **Multilingual Ready**: Infrastructure in place for English, French, and Arabic content
+- **Professional Components**: Built with shadcn/ui for consistent, accessible UI components
+- **Performance Optimized**: Fast loading times with Next.js optimizations
+- **SEO Friendly**: Proper meta tags and semantic HTML structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 15 with TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+- **Forms**: React Hook Form with Zod validation
+- **Deployment**: Ready for Vercel deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+ 
+- npm or yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd wam
+   ```
 
-## Deploy on Vercel
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📄 Pages
+
+- **Home** (`/`) - Main landing page with hero section and mission overview
+- **About** (`/about`) - Detailed information about WAM, founder's words, and organizational details
+- **Donation** (`/donation`) - Donation information with bank details and contact options
+- **Contact** (`/contact`) - Contact form and organization contact information
+- **Fashion For Hope** (`/fashion-for-hope`) - Information about quarterly fashion show events
+- **Terms of Use** (`/terms-of-use`) - Website terms and conditions
+- **Privacy Policy** (`/privacy-policy`) - Privacy policy and data protection information
+
+## 🎨 Design System
+
+The website uses a professional color scheme based on:
+- **Primary**: Blue (trust, professionalism)
+- **Secondary**: Purple (dignity, empowerment)
+- **Accent**: Various colors for different sections (green, pink, orange)
+
+## 📧 Contact Information
+
+- **Email**: info@ngowam.org
+- **Phone**: +41 (0)78 805 05 01
+- **Address**: Avenue Louis Casaï 71, CH-1216 Genève - Cointrin, Switzerland
+- **Mailing**: Case Postale 202, 1820 Montreux 2, Switzerland
+
+Built with ❤️ for WAM - Women Against Mutilations
