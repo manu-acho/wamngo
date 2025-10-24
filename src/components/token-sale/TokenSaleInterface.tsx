@@ -44,25 +44,25 @@ export default function TokenSaleInterface() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
       {/* Main Purchase Interface */}
       <div className="lg:col-span-2">
-        <Card className="p-6">
-          <CardHeader>
-            <CardTitle className="text-2xl flex items-center gap-2">
-              <Wallet className="w-6 h-6" />
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
+              <Wallet className="w-5 h-5 sm:w-6 sm:h-6" />
               Purchase WAMTokens
             </CardTitle>
           </CardHeader>
           
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6 px-0">
             {/* Progress Bar */}
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Sale Progress</span>
                 <span>75% Complete</span>
               </div>
-              <Progress value={75} className="h-3" />
+              <Progress value={75} className="h-2 sm:h-3" />
               <div className="flex justify-between text-xs text-gray-500">
                 <span>$2.1M Raised</span>
                 <span>Goal: $3M</span>
@@ -71,29 +71,29 @@ export default function TokenSaleInterface() {
 
             {/* Connection Status */}
             {!isConnected ? (
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Shield className="w-5 h-5 text-orange-600" />
-                  <span className="font-medium text-orange-800">Wallet Not Connected</span>
+                  <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+                  <span className="font-medium text-orange-800 text-sm sm:text-base">Wallet Not Connected</span>
                 </div>
-                <p className="text-orange-700 text-sm mb-3">
+                <p className="text-orange-700 text-xs sm:text-sm mb-3">
                   Connect your wallet to participate in the token sale
                 </p>
-                <Button onClick={connectWallet} className="w-full">
+                <Button onClick={connectWallet} className="w-full text-sm sm:text-base">
                   Connect Wallet
                 </Button>
               </div>
             ) : (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Shield className="w-5 h-5 text-green-600" />
-                  <span className="font-medium text-green-800">Wallet Connected</span>
+                  <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                  <span className="font-medium text-green-800 text-sm sm:text-base">Wallet Connected</span>
                 </div>
-                <p className="text-green-700 text-sm">
+                <p className="text-green-700 text-xs sm:text-sm">
                   {address?.slice(0, 6)}...{address?.slice(-4)}
                 </p>
                 {balance && (
-                  <p className="text-green-700 text-sm">
+                  <p className="text-green-700 text-xs sm:text-sm">
                     Balance: {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
                   </p>
                 )}
@@ -101,7 +101,7 @@ export default function TokenSaleInterface() {
             )}
 
             {/* Purchase Form */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">You Pay (ETH)</label>
                 <Input
@@ -110,6 +110,7 @@ export default function TokenSaleInterface() {
                   value={ethAmount}
                   onChange={(e) => handleEthChange(e.target.value)}
                   step="0.000001"
+                  className="text-sm sm:text-base"
                 />
                 <p className="text-xs text-gray-500">
                   ≈ ${(parseFloat(ethAmount) * ETH_PRICE).toFixed(2)} USD
@@ -123,6 +124,7 @@ export default function TokenSaleInterface() {
                   placeholder="0"
                   value={wamAmount}
                   onChange={(e) => handleWamChange(e.target.value)}
+                  className="text-sm sm:text-base"
                 />
                 <p className="text-xs text-gray-500">
                   @ $0.05 per token
@@ -133,7 +135,7 @@ export default function TokenSaleInterface() {
             {/* Purchase Button */}
             <Button
               onClick={purchaseTokens}
-              className="w-full h-12 text-lg"
+              className="w-full h-10 sm:h-12 text-sm sm:text-lg"
               disabled={!ethAmount || !wamAmount}
             >
               {!isConnected ? 'Connect Wallet' : 'Purchase WAM Tokens'}
@@ -150,37 +152,37 @@ export default function TokenSaleInterface() {
       </div>
 
       {/* Sale Information */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* Current Phase */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Current Phase</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base sm:text-lg">Current Phase</CardTitle>
           </CardHeader>
-          <CardContent>
-            <Badge variant="secondary" className="mb-4">
-              <Clock className="w-4 h-4 mr-1" />
+          <CardContent className="pt-0">
+            <Badge variant="secondary" className="mb-3 sm:mb-4 text-xs sm:text-sm">
+              <Clock className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
               Public Sale
             </Badge>
             
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Price</span>
-                <span className="font-semibold">$0.05</span>
+                <span className="text-xs sm:text-sm text-gray-600">Price</span>
+                <span className="font-semibold text-sm sm:text-base">$0.05</span>
               </div>
               
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Tokens Available</span>
-                <span className="font-semibold">12.5M WAM</span>
+                <span className="text-xs sm:text-sm text-gray-600">Tokens Available</span>
+                <span className="font-semibold text-sm sm:text-base">12.5M WAM</span>
               </div>
               
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Hard Cap</span>
-                <span className="font-semibold">$3M</span>
+                <span className="text-xs sm:text-sm text-gray-600">Hard Cap</span>
+                <span className="font-semibold text-sm sm:text-base">$3M</span>
               </div>
               
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Time Remaining</span>
-                <span className="font-semibold text-orange-600">14 days</span>
+                <span className="text-xs sm:text-sm text-gray-600">Time Remaining</span>
+                <span className="font-semibold text-orange-600 text-sm sm:text-base">14 days</span>
               </div>
             </div>
           </CardContent>
@@ -188,14 +190,14 @@ export default function TokenSaleInterface() {
 
         {/* Benefits */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <TrendingUp className="w-5 h-5" />
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
               Token Benefits
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 text-sm">
+          <CardContent className="pt-0">
+            <ul className="space-y-2 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-green-500 mt-0.5">✓</span>
                 <span>Governance voting rights</span>
@@ -222,14 +224,14 @@ export default function TokenSaleInterface() {
 
         {/* Security */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Shield className="w-5 h-5" />
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
               Security
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 text-sm">
+          <CardContent className="pt-0">
+            <ul className="space-y-2 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 mt-0.5">🔒</span>
                 <span>Smart contract audited by CertiK</span>
