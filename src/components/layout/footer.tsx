@@ -65,8 +65,8 @@ export function Footer() {
               to achieve our missions globally and make a difference in the fight 
               against female genital mutilation.
             </p>
-            <div className="text-sm text-gray-400">
-              <strong>UN Member</strong> • <strong>25 Years Experience</strong>
+                        <div className="text-center">
+              <strong>UN Member</strong> • <strong>Over Two Decades Experience</strong>
             </div>
           </div>
         </div>

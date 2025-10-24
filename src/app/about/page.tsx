@@ -17,7 +17,7 @@ export default function About() {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 wam-text-gradient">About WAM</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Women Against Mutilations - Fighting for women's rights and dignity for over 25 years
+              Women Against Mutilations - Fighting for women's rights and dignity for over two decades
             </p>
           </div>
         </div>
@@ -89,12 +89,12 @@ export default function About() {
                 <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-teal-400 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Award className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-xl wam-text-gradient">25 Years</CardTitle>
+                <CardTitle className="text-xl wam-text-gradient">Two Decades</CardTitle>
                 <Badge variant="secondary" className="mx-auto bg-pink-100 text-pink-800">Experience</Badge>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  With 25 years dedicated to the cause, WAM aims to raise awareness for victims through legal commissions and concrete actions.
+                  With over two decades dedicated to the cause, WAM aims to raise awareness for victims through legal commissions and concrete actions.
                 </p>
               </CardContent>
             </Card>

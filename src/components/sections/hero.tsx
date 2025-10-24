@@ -84,7 +84,7 @@ export function MissionSection() {
             Empower. Protect. Act.
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            With 25 years of dedication and UN ECOSOC status, WAM provides comprehensive 
+            With over two decades of dedication and UN ECOSOC status, WAM provides comprehensive 
             support through awareness, medical care, and community action.
           </p>
         </div>
@@ -142,8 +142,8 @@ export function StatsSection() {
             <p className="text-purple-100">Special ECOSOC Status</p>
           </div>
           <div className="wam-card bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-            <div className="text-4xl font-bold mb-2 wam-text-gradient bg-white text-transparent bg-clip-text">25 Years</div>
-            <p className="text-purple-100">Dedicated to the Cause</p>
+            <div className="text-4xl font-bold mb-2 wam-text-gradient bg-white text-transparent bg-clip-text">20+</div>
+            <p className="text-purple-100">Years of Dedication</p>
           </div>
           <div className="wam-card bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
             <div className="text-4xl font-bold mb-2 wam-text-gradient bg-white text-transparent bg-clip-text">200M+</div>
