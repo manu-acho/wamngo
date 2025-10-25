@@ -30,11 +30,11 @@ const project = {
 The platform addresses the critical problem of 412 maternal deaths per 100,000 births in underserved regions by providing immediate access to life-saving health information and emergency guidance.`,
   category: "health",
   fundingGoal: 3000000,
-  fundingRaised: 750000,
-  tokenAllocation: 1500000,
-  status: "active",
-  startDate: "2025-01-15",
-  estimatedCompletion: "2026-12-31",
+  fundingRaised: 0,
+  tokenAllocation: 30000000,
+  status: "pending",
+  startDate: "Awaiting DAO approval",
+  estimatedCompletion: "24 months from funding approval",
   impactGoals: {
     primary: "Reduce maternal mortality by 35%",
     users: "500,000 women reached in first 2 years",
@@ -68,37 +68,37 @@ The platform addresses the critical problem of 412 maternal deaths per 100,000 b
     {
       title: "AI Model Development",
       description: "Complete development and testing of voice-first AI models",
-      targetDate: "2025-06-30",
-      status: "in_progress",
+      targetDate: "6 months from project start",
+      status: "pending",
       fundingRequired: 800000
     },
     {
       title: "Pilot Deployment",
       description: "Deploy system in 2 pilot regions for testing",
-      targetDate: "2025-09-30", 
+      targetDate: "12 months from project start", 
       status: "pending",
       fundingRequired: 500000
     },
     {
       title: "Full Scale Deployment",
       description: "Roll out across all target regions",
-      targetDate: "2026-06-30",
+      targetDate: "18 months from project start",
       status: "pending", 
       fundingRequired: 1200000
     },
     {
       title: "Impact Evaluation",
       description: "Comprehensive impact assessment and optimization",
-      targetDate: "2026-12-31",
+      targetDate: "24 months from project start",
       status: "pending",
       fundingRequired: 500000
     }
   ],
   currentMetrics: [
-    { name: "Women Reached", current: 25000, target: 500000, unit: "users" },
-    { name: "Emergency Response Time", current: 8.5, target: 2.0, unit: "minutes" },
-    { name: "Languages Supported", current: 2, target: 5, unit: "languages" },
-    { name: "Health Centers Connected", current: 12, target: 100, unit: "centers" }
+    { name: "Women Reached", current: 0, target: 500000, unit: "users" },
+    { name: "Emergency Response Time", current: 0, target: 2.0, unit: "minutes" },
+    { name: "Languages Supported", current: 0, target: 5, unit: "languages" },
+    { name: "Health Centers Connected", current: 0, target: 100, unit: "centers" }
   ]
 };
 
@@ -132,7 +132,7 @@ export default function MaternalHealthAI() {
                 <div className="p-3 bg-red-100 rounded-full">
                   <Heart className="h-8 w-8 text-red-600" />
                 </div>
-                <Badge className="bg-green-500 text-white">Active Project</Badge>
+                <Badge className="bg-orange-500 text-white">Awaiting DAO Approval</Badge>
               </div>
               
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
@@ -141,14 +141,18 @@ export default function MaternalHealthAI() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-red-900 hover:bg-red-50">
-                  <Zap className="mr-2 h-5 w-5" />
-                  Fund This Project
-                </Button>
-                <Button size="lg" variant="outline" className="border-white !text-white hover:!bg-white hover:!text-red-900 transition-all duration-200">
-                  <Users className="mr-2 h-5 w-5" />
-                  Join Community
-                </Button>
+                <Link href="/token-sale">
+                  <Button size="lg" className="bg-white text-red-900 hover:bg-red-50">
+                    <Zap className="mr-2 h-5 w-5" />
+                    Fund This Project
+                  </Button>
+                </Link>
+                <Link href="/governance">
+                  <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
+                    <Users className="mr-2 h-5 w-5" />
+                    Join Community
+                  </Button>
+                </Link>
               </div>
             </div>
             
@@ -191,10 +195,29 @@ export default function MaternalHealthAI() {
         </div>
       </section>
 
+      {/* Project Status Notice */}
+      <section className="py-8 bg-orange-50 border-l-4 border-orange-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <Clock className="h-8 w-8 text-orange-600" />
+            </div>
+            <div className="ml-4">
+              <h3 className="text-lg font-medium text-orange-800">Project Status: Awaiting DAO Approval</h3>
+              <p className="text-orange-700">
+                This project is currently pending community approval through our DAO governance system. 
+                No funding has been raised yet and the project has not started. All metrics shown below are targets 
+                that will be achieved once the project receives approval and funding from the WAM community.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Key Metrics */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Current Impact Metrics</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Target Impact Metrics</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {project.currentMetrics.map((metric, index) => (
               <Card key={index}>
@@ -344,14 +367,18 @@ export default function MaternalHealthAI() {
             this maternal health AI system, potentially saving thousands of lives.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-red-900 hover:bg-red-50">
-              <TrendingUp className="mr-2 h-5 w-5" />
-              Purchase WAMTokens
-            </Button>
-            <Button size="lg" variant="outline" className="border-white !text-white hover:!bg-white hover:!text-red-900 transition-all duration-200">
-              <Heart className="mr-2 h-5 w-5" />
-              Join DAO Governance
-            </Button>
+            <Link href="/token-sale">
+              <Button size="lg" className="bg-white text-red-900 hover:bg-red-50">
+                <TrendingUp className="mr-2 h-5 w-5" />
+                Purchase WAMTokens
+              </Button>
+            </Link>
+            <Link href="/governance">
+              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
+                <Heart className="mr-2 h-5 w-5" />
+                Join DAO Governance
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
