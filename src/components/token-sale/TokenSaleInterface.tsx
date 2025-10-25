@@ -127,7 +127,7 @@ export default function TokenSaleInterface() {
                   className="text-sm sm:text-base"
                 />
                 <p className="text-xs text-gray-500">
-                  @ $0.05 per token
+                  @ $0.10 per token
                 </p>
               </div>
             </div>

@@ -38,7 +38,7 @@
 ### **Token Allocation**
 ```
 📊 Tokenomics Breakdown:
-├── 🎯 Project Funding (45% - 450M WAM)
+├── 🎯 Project Funding (52% - 520M WAM)
 │   └── Direct funding for women's rights initiatives
 ├── 👥 Public Sale (20% - 200M WAM)
 │   └── Community participation and platform funding
@@ -46,8 +46,6 @@
 │   └── Educational benefits, bootcamps, scholarships
 ├── ⚙️ Operations & Development (10% - 100M WAM)
 │   └── Platform development and sustainability
-├── 👨‍💼 Team & Foundation (7% - 70M WAM)
-│   └── Core team with long-term vesting
 └── 🚨 Emergency Reserve (3% - 30M WAM)
     └── Crisis response and emergency funding
 ```
@@ -227,7 +225,7 @@ We welcome contributions from the community! Please read our [Contributing Guide
 
 ## � **Contact & Community**
 
-- **Website**: [wam-ngo.org](https://wam-ngo.org)
+- **Website**: [ngowam.org](https://ngowam.org)
 - **Email**: info@ngowam.org
 - **Phone**: +41 (0)78 805 05 01
 - **Address**: Avenue Louis Casaï 71, CH-1216 Genève - Cointrin, Switzerland
@@ -244,7 +242,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 **Acknowledgments**
 
-- **Founder**: Manu Acho - Visionary leader combining humanitarian work with Web3 innovation
+- **Founder**: Amy Neff - Visionary leader combining humanitarian work with Web3 innovation
 - **Community**: All WAM token holders and governance participants
 - **Technology Partners**: Next.js, Tailwind CSS, RainbowKit, and the broader Web3 ecosystem
 - **Mission Partners**: Organizations worldwide fighting for women's rights

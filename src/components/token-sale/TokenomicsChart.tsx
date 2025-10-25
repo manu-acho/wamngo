@@ -3,7 +3,7 @@
 const tokenomicsData = [
   {
     name: 'Project Funding',
-    value: 45,
+    value: 52,
     color: 'bg-blue-500',
     description: 'Direct funding for women\'s rights projects and community initiatives'
   },
@@ -24,12 +24,6 @@ const tokenomicsData = [
     value: 10,
     color: 'bg-orange-500',
     description: 'Platform development, operations, and sustainability'
-  },
-  {
-    name: 'Team & Foundation',
-    value: 7,
-    color: 'bg-teal-500',
-    description: 'Core team allocation with long-term vesting'
   },
   {
     name: 'Emergency Reserve',
@@ -122,7 +116,7 @@ export default function TokenomicsChart() {
           <div>
             <span className="font-semibold">Project Funding:</span>
             <br />
-            <span className="text-gray-600">45% (450M WAM)</span>
+            <span className="text-gray-600">52% (520M WAM)</span>
           </div>
           <div>
             <span className="font-semibold">Community Rewards:</span>
@@ -137,7 +131,7 @@ export default function TokenomicsChart() {
         </div>
         <div className="mt-4 p-3 bg-blue-50 rounded-lg">
           <p className="text-sm text-blue-800">
-            <strong>NGO Focus:</strong> 45% dedicated to direct project funding ensures maximum impact for women's rights initiatives
+            <strong>NGO Focus:</strong> 52% dedicated to direct project funding ensures maximum impact for women's rights initiatives
           </p>
         </div>
       </div>

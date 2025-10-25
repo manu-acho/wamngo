@@ -10,7 +10,7 @@ const faqData = [
   },
   {
     question: "How can I purchase WAM tokens?",
-    answer: "You can purchase WAM tokens during our public sale by connecting your Web3 wallet (MetaMask, WalletConnect, etc.) and exchanging ETH for WAM tokens. The current price is $0.05 per token with a minimum purchase of 1,000 WAM tokens."
+    answer: "You can purchase WAM tokens during our public sale by connecting your Web3 wallet (MetaMask, WalletConnect, etc.) and exchanging ETH for WAM tokens. The current price is $0.10 per token with a minimum purchase of 100 WAM tokens ($10 minimum)."
   },
   {
     question: "What are the benefits of holding WAM tokens?",
@@ -30,7 +30,7 @@ const faqData = [
   },
   {
     question: "What happens to the funds raised?",
-    answer: "Funds are transparently allocated: 40% directly funds women's rights projects, 25% for public sale, 15% for team with vesting, 10% for ecosystem development, and 10% for liquidity and marketing."
+    answer: "Funds are transparently allocated as follows: 52% directly funds women's rights projects, 20% for public sale, 15% for community rewards and education, 10% for operations & development, and 3% for emergency reserves. No team allocation ensures all funds serve our humanitarian mission."
   },
   {
     question: "Is the smart contract audited?",
