@@ -36,26 +36,26 @@ export default function TokenSalePage() {
           </h1>
           
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
-            Empower women's rights through blockchain technology. WAMToken will enable decentralized funding for our four transformative projects totaling $11.3M in community-driven impact.
+            Empower women's rights through blockchain technology. WAMToken will enable decentralized funding for our transformative projects with a $12M funding goal to maximize community-driven impact.
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto mb-8 sm:mb-12">
             <div className="wam-card p-4 sm:p-6">
-              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$0.05</div>
-              <div className="text-gray-600 text-sm sm:text-base">Target Price</div>
-              <div className="text-xs sm:text-sm text-purple-600 mt-1">Initial offering goal</div>
+              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$0.10</div>
+              <div className="text-gray-600 text-sm sm:text-base">Token Price</div>
+              <div className="text-xs sm:text-sm text-purple-600 mt-1">Current offering price</div>
             </div>
             
             <div className="wam-card p-4 sm:p-6">
-              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">100M</div>
+              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">1B</div>
               <div className="text-gray-600 text-sm sm:text-base">Total Supply</div>
-              <div className="text-xs sm:text-sm text-pink-600 mt-1">Fixed supply planned</div>
+              <div className="text-xs sm:text-sm text-pink-600 mt-1">Fixed supply cap</div>
             </div>
             
             <div className="wam-card p-4 sm:p-6 sm:col-span-2 md:col-span-1">
-              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$11.3M</div>
-              <div className="text-gray-600 text-sm sm:text-base">Project Funding Goal</div>
-              <div className="text-xs sm:text-sm text-teal-600 mt-1">Total needed for all 4 projects</div>
+              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$12M</div>
+              <div className="text-gray-600 text-sm sm:text-base">Funding Goal</div>
+              <div className="text-xs sm:text-sm text-teal-600 mt-1">Current phase target</div>
             </div>
           </div>
         </div>

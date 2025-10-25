@@ -14,7 +14,7 @@ export default function TokenSaleInterface() {
   const [wamAmount, setWamAmount] = useState('');
   const { address, isConnected, connectWallet, balance } = useWeb3();
 
-  const WAM_PRICE = 0.05; // $0.05 per WAM token
+  const WAM_PRICE = 0.10; // $0.10 per WAM token
   const ETH_PRICE = 2300; // Mock ETH price
 
   const handleEthChange = (value: string) => {
@@ -65,7 +65,7 @@ export default function TokenSaleInterface() {
               <Progress value={0} className="h-2 sm:h-3" key="progress-bar-0" />
               <div className="flex justify-between text-xs text-gray-500">
                 <span>$0 Raised</span>
-                <span>Goal: $3M</span>
+                <span>Goal: $12M</span>
               </div>
             </div>
 
@@ -143,7 +143,7 @@ export default function TokenSaleInterface() {
 
             {/* Purchase Info */}
             <div className="text-xs text-gray-500 space-y-1">
-              <p>• Minimum purchase: 1000 WAM tokens</p>
+              <p>• Minimum purchase: 100 WAM tokens ($10)</p>
               <p>• Maximum purchase: 100,000 WAM tokens per transaction</p>
               <p>• Tokens will be distributed after TGE (Token Generation Event)</p>
             </div>
@@ -167,17 +167,17 @@ export default function TokenSaleInterface() {
             <div className="space-y-2 sm:space-y-3">
               <div className="flex justify-between">
                 <span className="text-xs sm:text-sm text-gray-600">Price</span>
-                <span className="font-semibold text-sm sm:text-base">$0.05</span>
+                <span className="font-semibold text-sm sm:text-base">$0.10</span>
               </div>
               
               <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Tokens Available</span>
-                <span className="font-semibold text-sm sm:text-base">12.5M WAM</span>
+                <span className="text-xs sm:text-sm text-gray-600">Total Supply</span>
+                <span className="font-semibold text-sm sm:text-base">1B WAM</span>
               </div>
               
               <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Hard Cap</span>
-                <span className="font-semibold text-sm sm:text-base">$3M</span>
+                <span className="text-xs sm:text-sm text-gray-600">Funding Goal</span>
+                <span className="font-semibold text-sm sm:text-base">$12M</span>
               </div>
               
               <div className="flex justify-between">
@@ -200,23 +200,23 @@ export default function TokenSaleInterface() {
             <ul className="space-y-2 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-green-500 mt-0.5">✓</span>
-                <span>Governance voting rights</span>
+                <span>Governance voting rights in community decisions</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-500 mt-0.5">✓</span>
-                <span>Staking rewards up to 12% APY</span>
+                <span className="text-purple-500 mt-0.5">✓</span>
+                <span>Earn points through staking for community benefits</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-500 mt-0.5">✓</span>
-                <span>Priority access to funded projects</span>
+                <span className="text-blue-500 mt-0.5">✓</span>
+                <span>Access to bootcamps and educational programs</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-500 mt-0.5">✓</span>
-                <span>Exclusive community features</span>
+                <span className="text-pink-500 mt-0.5">✓</span>
+                <span>Scholarship opportunities and conference tickets</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-500 mt-0.5">✓</span>
-                <span>Early access to new features</span>
+                <span className="text-teal-500 mt-0.5">✓</span>
+                <span>Volunteer camp participation and mentorship access</span>
               </li>
             </ul>
           </CardContent>

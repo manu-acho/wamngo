@@ -3,33 +3,39 @@
 const tokenomicsData = [
   {
     name: 'Project Funding',
-    value: 40,
+    value: 45,
     color: 'bg-blue-500',
-    description: 'Direct funding for women\'s rights projects and initiatives'
+    description: 'Direct funding for women\'s rights projects and community initiatives'
   },
   {
     name: 'Public Sale',
-    value: 25,
+    value: 20,
     color: 'bg-purple-500',
-    description: 'Tokens available for public purchase'
+    description: 'Tokens available for community participation'
   },
   {
-    name: 'Team & Advisors',
+    name: 'Community Rewards',
     value: 15,
     color: 'bg-green-500',
-    description: 'Team allocation with 2-year vesting schedule'
+    description: 'Staking rewards, governance incentives, and community benefits'
   },
   {
-    name: 'Ecosystem Development',
+    name: 'Operations & Development',
     value: 10,
     color: 'bg-orange-500',
-    description: 'Technology development and platform enhancement'
+    description: 'Platform development, operations, and sustainability'
   },
   {
-    name: 'Liquidity & Marketing',
-    value: 10,
+    name: 'Team & Foundation',
+    value: 7,
+    color: 'bg-teal-500',
+    description: 'Core team allocation with long-term vesting'
+  },
+  {
+    name: 'Emergency Reserve',
+    value: 3,
     color: 'bg-red-500',
-    description: 'Exchange listings and marketing initiatives'
+    description: 'Emergency funding for critical situations'
   }
 ];
 
@@ -68,6 +74,7 @@ export default function TokenomicsChart() {
                   item.color === 'bg-purple-500' ? '139 92 246' :
                   item.color === 'bg-green-500' ? '16 185 129' :
                   item.color === 'bg-orange-500' ? '245 158 11' :
+                  item.color === 'bg-teal-500' ? '20 184 166' :
                   '239 68 68'
                 })`}
                 strokeWidth="20"
@@ -82,7 +89,7 @@ export default function TokenomicsChart() {
         {/* Center text */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900">100M</div>
+            <div className="text-2xl font-bold text-gray-900">1B</div>
             <div className="text-sm text-gray-600">Total Supply</div>
           </div>
         </div>
@@ -105,18 +112,33 @@ export default function TokenomicsChart() {
       </div>
       
       <div className="mt-6 text-center">
-        <h3 className="text-xl font-bold mb-4">Total Supply: 100,000,000 WAM</h3>
+        <h3 className="text-xl font-bold mb-4">Total Supply: 1,000,000,000 WAM</h3>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <span className="font-semibold">Initial Circulation:</span>
+            <span className="font-semibold">Public Sale Allocation:</span>
             <br />
-            <span className="text-gray-600">25% (25M WAM)</span>
+            <span className="text-gray-600">20% (200M WAM)</span>
+          </div>
+          <div>
+            <span className="font-semibold">Project Funding:</span>
+            <br />
+            <span className="text-gray-600">45% (450M WAM)</span>
+          </div>
+          <div>
+            <span className="font-semibold">Community Rewards:</span>
+            <br />
+            <span className="text-gray-600">15% (150M WAM)</span>
           </div>
           <div>
             <span className="font-semibold">Max Supply:</span>
             <br />
-            <span className="text-gray-600">Fixed at 100M</span>
+            <span className="text-gray-600">Fixed at 1B</span>
           </div>
+        </div>
+        <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+          <p className="text-sm text-blue-800">
+            <strong>NGO Focus:</strong> 45% dedicated to direct project funding ensures maximum impact for women's rights initiatives
+          </p>
         </div>
       </div>
     </div>
