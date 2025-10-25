@@ -53,21 +53,20 @@ export default function ReconstructionTechnologyProject() {
         </div>
       </section>
 
-      {/* Coming Soon Notice */}
-      <section className="py-16 wam-gradient-surface">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="wam-card p-8 mb-8">
-            <div className="w-20 h-20 bg-gradient-to-r from-red-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Calendar className="h-10 w-10 text-white" />
+      {/* Project Status Notice */}
+      <section className="py-8 bg-blue-50 border-l-4 border-blue-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <Target className="h-8 w-8 text-blue-600" />
             </div>
-            <h2 className="text-3xl font-bold wam-text-gradient mb-4">Full Documentation in Development</h2>
-            <p className="text-lg text-gray-600 mb-6">
-              This is our most advanced project currently in pilot phase. We're preparing comprehensive 
-              clinical documentation, safety protocols, and expansion plans. Detailed information will 
-              be available as we progress toward full-scale implementation.
-            </p>
-            <div className="text-sm text-gray-500">
-              Expected comprehensive documentation: Q2 2026
+            <div className="ml-4">
+              <h3 className="text-lg font-medium text-blue-800">Project Status: Scale-up Awaiting DAO Approval</h3>
+              <p className="text-blue-700">
+                While our pilot program has shown promising results with initial funding, the full-scale expansion 
+                to 20 centers and 10,000 treatments requires community approval through our DAO governance system. 
+                Scale-up funding has not been raised yet through WAM tokens.
+              </p>
             </div>
           </div>
         </div>
@@ -218,7 +217,7 @@ export default function ReconstructionTechnologyProject() {
               <p className="text-gray-600">Treatment Centers</p>
             </div>
             <div className="wam-card text-center p-6">
-              <div className="text-3xl font-bold wam-text-gradient mb-2">2M</div>
+              <div className="text-3xl font-bold wam-text-gradient mb-2">40M</div>
               <p className="text-gray-600">WAM Tokens</p>
             </div>
             <div className="wam-card text-center p-6">

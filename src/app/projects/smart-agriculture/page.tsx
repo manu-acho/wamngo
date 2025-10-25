@@ -12,7 +12,8 @@ import {
   TrendingUp,
   Brain,
   Eye,
-  Smartphone
+  Smartphone,
+  Clock
 } from "lucide-react";
 import Link from "next/link";
 
@@ -51,21 +52,20 @@ export default function SmartAgricultureProject() {
         </div>
       </section>
 
-      {/* Coming Soon Notice */}
-      <section className="py-16 wam-gradient-surface">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="wam-card p-8 mb-8">
-            <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Calendar className="h-10 w-10 text-white" />
+      {/* Project Status Notice */}
+      <section className="py-8 bg-orange-50 border-l-4 border-orange-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <Clock className="h-8 w-8 text-orange-600" />
             </div>
-            <h2 className="text-3xl font-bold wam-text-gradient mb-4">Detailed Information Coming Soon</h2>
-            <p className="text-lg text-gray-600 mb-6">
-              We're currently developing comprehensive documentation for this project. 
-              Check back soon for complete technical specifications, implementation timeline, 
-              and partnership details.
-            </p>
-            <div className="text-sm text-gray-500">
-              Expected documentation release: Q1 2026
+            <div className="ml-4">
+              <h3 className="text-lg font-medium text-orange-800">Project Status: Awaiting DAO Approval</h3>
+              <p className="text-orange-700">
+                This project is currently pending community approval through our DAO governance system. 
+                No funding has been raised yet and the project has not started. All metrics shown below are targets 
+                that will be achieved once the project receives approval and funding from the WAM community.
+              </p>
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function SmartAgricultureProject() {
               <p className="text-gray-600">Farmers to Reach</p>
             </div>
             <div className="wam-card text-center p-6">
-              <div className="text-3xl font-bold wam-text-gradient mb-2">1.25M</div>
+              <div className="text-3xl font-bold wam-text-gradient mb-2">25M</div>
               <p className="text-gray-600">WAM Tokens</p>
             </div>
             <div className="wam-card text-center p-6">
