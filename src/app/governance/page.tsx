@@ -262,21 +262,21 @@ export default function GovernancePage() {
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold wam-text-gradient mb-4">Governance Goals</h2>
               <p className="text-xl text-gray-600">
-                Our ambitious targets for how community governance will shape WAM's funding decisions and global impact.
+                Our realistic SMART targets for how community governance will shape WAM's funding decisions and global impact.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="wam-card p-6 text-center">
-                <div className="text-3xl font-bold wam-text-gradient mb-2">100+</div>
+                <div className="text-3xl font-bold wam-text-gradient mb-2">3</div>
                 <div className="text-gray-600">Annual Proposals</div>
-                <div className="text-sm text-purple-600 mt-1">Target for year 1</div>
+                <div className="text-sm text-purple-600 mt-1">Realistic processing capacity</div>
               </div>
               
               <div className="wam-card p-6 text-center">
-                <div className="text-3xl font-bold wam-text-gradient mb-2">$5M</div>
+                <div className="text-3xl font-bold wam-text-gradient mb-2">$12M</div>
                 <div className="text-gray-600">Treasury Goal</div>
-                <div className="text-sm text-pink-600 mt-1">Total allocation target</div>
+                <div className="text-sm text-pink-600 mt-1">Total initial allocation target</div>
               </div>
               
               <div className="wam-card p-6 text-center">
@@ -286,9 +286,9 @@ export default function GovernancePage() {
               </div>
               
               <div className="wam-card p-6 text-center">
-                <div className="text-3xl font-bold wam-text-gradient mb-2">25</div>
+                <div className="text-3xl font-bold wam-text-gradient mb-2">15</div>
                 <div className="text-gray-600">Countries Target</div>
-                <div className="text-sm text-purple-600 mt-1">Global reach goal</div>
+                <div className="text-sm text-purple-600 mt-1">Achievable global reach</div>
               </div>
             </div>
           </div>
