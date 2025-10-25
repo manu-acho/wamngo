@@ -2,8 +2,16 @@
 
 import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { useEffect, useState } from 'react';
 
 export function useWeb3() {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Always call wagmi hooks (following Rules of Hooks)
   const { address, isConnected, isConnecting } = useAccount();
   const { connect, connectors, error, isPending } = useConnect();
   const { disconnect } = useDisconnect();
@@ -11,27 +19,33 @@ export function useWeb3() {
   
   const { data: balance, isLoading: balanceLoading } = useBalance({
     address: address,
+    query: {
+      enabled: mounted && !!address, // Only fetch when mounted and address exists
+    }
   });
 
   const connectWallet = () => {
-    if (openConnectModal) {
+    if (mounted && openConnectModal) {
       openConnectModal();
     }
   };
 
   const disconnectWallet = () => {
-    disconnect();
+    if (mounted) {
+      disconnect();
+    }
   };
 
+  // Return safe values during SSR, but still use hook results
   return {
-    address,
-    isConnected,
-    isConnecting,
-    balance,
-    balanceLoading,
+    address: mounted ? address : undefined,
+    isConnected: mounted ? isConnected : false,
+    isConnecting: mounted ? isConnecting : false,
+    balance: mounted ? balance : undefined,
+    balanceLoading: mounted ? balanceLoading : false,
     connectWallet,
     disconnectWallet,
-    error,
-    isLoading: isPending,
+    error: mounted ? error : undefined,
+    isLoading: mounted ? isPending : false,
   };
 }

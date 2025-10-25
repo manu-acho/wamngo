@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Layout } from '@/components/layout/layout';
 import { Web3Provider } from '@/components/web3/Web3Provider';
-import TokenSaleInterface from '@/components/token-sale/TokenSaleInterface';
+import TokenSaleWrapper from '@/components/token-sale/TokenSaleWrapper';
 import TokenomicsChart from '@/components/token-sale/TokenomicsChart';
 import RoadmapSection from '@/components/token-sale/RoadmapSection';
 import FAQSection from '@/components/token-sale/FAQSection';
@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'WAMToken Sale | Women Against Mutilations',
   description: 'Join the WAM ecosystem through our token sale. Empower change, drive innovation, and participate in decentralized funding for women\'s rights projects.',
 };
+
+// Disable static generation for this page since it uses Web3 hooks
+export const dynamic = 'force-dynamic';
 
 export default function TokenSalePage() {
   return (
@@ -64,7 +67,7 @@ export default function TokenSalePage() {
       {/* Token Sale Interface */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <TokenSaleInterface />
+          <TokenSaleWrapper />
         </div>
       </section>
 

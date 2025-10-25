@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: 'Participate in decentralized governance. Vote on project proposals, shape funding decisions, and help build a better future for women\'s rights.',
 };
 
+// Disable static generation for this page since it uses Web3 hooks
+export const dynamic = 'force-dynamic';
+
 export default function GovernancePage() {
   return (
     <Layout>
@@ -30,7 +33,7 @@ export default function GovernancePage() {
                 DAO Governance Platform
               </div>
               
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 wam-text-gradient">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 wam-text-gradient pb-2">
                 Community Governance
               </h1>
               

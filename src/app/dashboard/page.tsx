@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description: 'Track your WAM tokens, staking rewards, voting history, and portfolio performance in your personal dashboard.',
 };
 
+// Disable static generation for this page since it uses Web3 hooks
+export const dynamic = 'force-dynamic';
+
 export default function DashboardPage() {
   // In a real app, you would check wallet connection status here
   const isWalletConnected = false; // This would come from your Web3 context

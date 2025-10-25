@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +12,13 @@ import { useWeb3 } from '@/hooks/useWeb3';
 export default function TokenSaleInterface() {
   const [ethAmount, setEthAmount] = useState('');
   const [wamAmount, setWamAmount] = useState('');
+  const [mounted, setMounted] = useState(false);
+  
+  // Handle hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { address, isConnected, connectWallet, balance } = useWeb3();
 
   const WAM_PRICE = 0.10; // $0.10 per WAM token

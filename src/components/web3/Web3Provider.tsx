@@ -5,6 +5,7 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { createConfig, WagmiProvider, http } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, sepolia, base, baseSepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 
 // Configure chains
 const chains = [mainnet, polygon, optimism, arbitrum, base, sepolia, baseSepolia] as const;
@@ -49,10 +50,25 @@ interface Web3ProviderProps {
 }
 
 export function Web3Provider({ children }: Web3ProviderProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch by not rendering Web3 components on server
+  if (!mounted) {
+    return <div>{children}</div>;
+  }
+
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider
+          modalSize="compact"
+          initialChain={mainnet}
+          showRecentTransactions={true}
+        >
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
