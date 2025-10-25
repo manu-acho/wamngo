@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Globe, Wallet, Zap, ChevronDown, Heart, Mail } from "lucide-react";
+import { Menu, X, Globe, Wallet, Zap, ChevronDown, Heart, Mail, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 
@@ -16,7 +16,8 @@ const navigationItems = [
 ];
 
 const moreItems = [
-  { href: "/donation", label: "Donation", icon: Heart },
+  { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
+  { href: "/donation", label: "Donate", icon: Heart },
   { href: "/fashion-for-hope", label: "Fashion For Hope", icon: Heart },
   { href: "/contact", label: "Contact", icon: Mail },
 ];
@@ -136,7 +137,7 @@ export function Navigation() {
           <div className="flex items-center space-x-3">
             {/* Connect Wallet Button (Desktop) */}
             <div className="hidden lg:block">
-              {pathname === '/token-sale' || pathname === '/governance' ? (
+              {pathname === '/token-sale' || pathname === '/governance' || pathname === '/dashboard' ? (
                 <Button 
                   size="sm" 
                   className="wam-btn-primary text-white font-medium px-6 py-2 wam-float"
@@ -234,7 +235,7 @@ export function Navigation() {
               </div>
               
               {/* Mobile Wallet Connect */}
-              {(pathname === '/token-sale' || pathname === '/governance') && (
+              {(pathname === '/token-sale' || pathname === '/governance' || pathname === '/dashboard') && (
                 <div className="pt-3 mt-3 border-t border-gray-200/50">
                   <Button 
                     size="sm" 

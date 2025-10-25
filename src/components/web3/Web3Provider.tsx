@@ -5,7 +5,6 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { createConfig, WagmiProvider, http } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, sepolia, base, baseSepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useState } from 'react';
 
 // Configure chains
 const chains = [mainnet, polygon, optimism, arbitrum, base, sepolia, baseSepolia] as const;
@@ -31,13 +30,25 @@ const wagmiConfig = createConfig({
   },
 });
 
+// Create QueryClient outside component to prevent hydration issues
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Disable automatic refetching during SSR
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+});
+
 interface Web3ProviderProps {
   children: React.ReactNode;
 }
 
 export function Web3Provider({ children }: Web3ProviderProps) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>

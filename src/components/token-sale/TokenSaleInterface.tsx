@@ -60,11 +60,11 @@ export default function TokenSaleInterface() {
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Sale Progress</span>
-                <span>75% Complete</span>
+                <span>0% Complete</span>
               </div>
-              <Progress value={75} className="h-2 sm:h-3" />
+              <Progress value={0} className="h-2 sm:h-3" key="progress-bar-0" />
               <div className="flex justify-between text-xs text-gray-500">
-                <span>$2.1M Raised</span>
+                <span>$0 Raised</span>
                 <span>Goal: $3M</span>
               </div>
             </div>

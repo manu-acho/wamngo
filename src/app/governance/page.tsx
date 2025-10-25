@@ -1,11 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Layout } from '@/components/layout/layout';
+import { Web3Provider } from '@/components/web3/Web3Provider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Vote, Users, Calendar, CheckCircle, Clock, TrendingUp, Shield, Coins } from 'lucide-react';
+import ProposalList from '@/components/governance/ProposalList';
+import CreateProposal from '@/components/governance/CreateProposal';
+import StakingInterface from '@/components/governance/StakingInterface';
 
 export const metadata: Metadata = {
   title: 'DAO Governance | WAM - Women Against Mutilations',
@@ -15,46 +20,92 @@ export const metadata: Metadata = {
 export default function GovernancePage() {
   return (
     <Layout>
-      <div className="min-h-screen wam-gradient-surface">
-        {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4">
-          <div className="max-w-7xl mx-auto text-center">
-            <div className="mb-8 inline-flex items-center px-4 py-2 rounded-full wam-card border-purple-200">
-              <Vote className="w-4 h-4 mr-2 text-purple-600" />
-              DAO Governance - Coming Soon
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 wam-text-gradient">
-              Shape the Future
-            </h1>
-            
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Join our decentralized autonomous organization (DAO) to have your say in which projects receive funding. Your voice will matter in creating lasting change.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
-              <div className="wam-card p-6 text-center">
-                <div className="text-3xl font-bold wam-text-gradient mb-2">1,000+</div>
-                <div className="text-gray-600">Target Voters</div>
-                <div className="text-sm text-purple-600 mt-1">Goal for launch</div>
+      <Web3Provider>
+        <div className="min-h-screen wam-gradient-surface">
+          {/* Hero Section */}
+          <section className="pt-24 pb-16 px-4">
+            <div className="max-w-7xl mx-auto text-center">
+              <div className="mb-8 inline-flex items-center px-4 py-2 rounded-full wam-card border-purple-200">
+                <Vote className="w-4 h-4 mr-2 text-purple-600" />
+                DAO Governance Platform
               </div>
               
-              <div className="wam-card p-6 text-center">
-                <div className="text-3xl font-bold wam-text-gradient mb-2">50+</div>
-                <div className="text-gray-600">Planned Proposals</div>
-                <div className="text-sm text-pink-600 mt-1">Annual target</div>
-              </div>
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 wam-text-gradient">
+                Community Governance
+              </h1>
               
-              <div className="wam-card p-6 text-center">
-                <div className="text-3xl font-bold wam-text-gradient mb-2">$5M</div>
-                <div className="text-gray-600">Funding Goal</div>
-                <div className="text-sm text-teal-600 mt-1">Community treasury target</div>
+              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Our DAO governance platform is currently in development. Once launched, community members will vote on project funding and strategic decisions using WAM tokens.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+                <div className="wam-card p-6 text-center">
+                  <div className="text-3xl font-bold wam-text-gradient mb-2">Q1 2026</div>
+                  <div className="text-gray-600">DAO Launch</div>
+                  <div className="text-sm text-purple-600 mt-1">Governance goes live</div>
+                </div>
+                
+                <div className="wam-card p-6 text-center">
+                  <div className="text-3xl font-bold wam-text-gradient mb-2">4</div>
+                  <div className="text-gray-600">Projects Ready</div>
+                  <div className="text-sm text-pink-600 mt-1">Awaiting community funding</div>
+                </div>
+                
+                <div className="wam-card p-6 text-center">
+                  <div className="text-3xl font-bold wam-text-gradient mb-2">$11.3M</div>
+                  <div className="text-gray-600">Total Project Funding</div>
+                  <div className="text-sm text-teal-600 mt-1">Required for all initiatives</div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* How It Works */}
+          {/* Main Governance Interface */}
+          <section className="py-16 px-4">
+            <div className="max-w-7xl mx-auto">
+              <Tabs defaultValue="proposals" className="space-y-8">
+                <TabsList className="grid w-full grid-cols-3 max-w-md mx-auto">
+                  <TabsTrigger value="proposals">Proposals</TabsTrigger>
+                  <TabsTrigger value="create">Create</TabsTrigger>
+                  <TabsTrigger value="staking">Staking</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="proposals" className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold wam-text-gradient mb-4">Project Proposals</h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                      Preview the projects that will be available for community voting when our DAO launches in Q1 2026.
+                    </p>
+                  </div>
+                  <ProposalList />
+                </TabsContent>
+                
+                <TabsContent value="create" className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold wam-text-gradient mb-4">Submit Project Ideas</h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                      Prepare your project proposal for when the DAO launches. Community feedback available now.
+                    </p>
+                  </div>
+                  <div className="max-w-4xl mx-auto">
+                    <CreateProposal />
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="staking" className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold wam-text-gradient mb-4">Community Staking & Benefits</h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                      Stake WAM tokens to gain voting power and earn points redeemable for bootcamps, scholarships, and conference access.
+                    </p>
+                  </div>
+                  <StakingInterface />
+                </TabsContent>
+              </Tabs>
+            </div>
+          </section>
+
+          {/* How It Works */}
         <section className="py-16 px-4 bg-white/50 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
@@ -269,7 +320,8 @@ export default function GovernancePage() {
             </div>
           </div>
         </section>
-      </div>
+        </div>
+      </Web3Provider>
     </Layout>
   );
 }

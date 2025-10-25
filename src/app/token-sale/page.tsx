@@ -36,7 +36,7 @@ export default function TokenSalePage() {
           </h1>
           
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
-            Empower women's rights through blockchain technology. WAMToken will enable decentralized funding for projects that combat violence against women and promote gender equality worldwide.
+            Empower women's rights through blockchain technology. WAMToken will enable decentralized funding for our four transformative projects totaling $11.3M in community-driven impact.
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto mb-8 sm:mb-12">
@@ -53,9 +53,9 @@ export default function TokenSalePage() {
             </div>
             
             <div className="wam-card p-4 sm:p-6 sm:col-span-2 md:col-span-1">
-              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$3M</div>
-              <div className="text-gray-600 text-sm sm:text-base">Funding Goal</div>
-              <div className="text-xs sm:text-sm text-teal-600 mt-1">Target for projects</div>
+              <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$11.3M</div>
+              <div className="text-gray-600 text-sm sm:text-base">Project Funding Goal</div>
+              <div className="text-xs sm:text-sm text-teal-600 mt-1">Total needed for all 4 projects</div>
             </div>
           </div>
         </div>
