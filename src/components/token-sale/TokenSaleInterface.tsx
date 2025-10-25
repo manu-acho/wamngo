@@ -44,10 +44,10 @@ export default function TokenSaleInterface() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
       {/* Main Purchase Interface */}
-      <div className="lg:col-span-2">
-        <Card className="p-4 sm:p-6">
+      <div className="lg:col-span-3">
+        <Card className="p-4 sm:p-6 h-fit sticky top-24">
           <CardHeader className="px-0 pt-0">
             <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
               <Wallet className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -151,100 +151,99 @@ export default function TokenSaleInterface() {
         </Card>
       </div>
 
-      {/* Sale Information */}
-      <div className="space-y-4 sm:space-y-6">
+      {/* Sale Information Sidebar */}
+      <div className="lg:col-span-2 space-y-6">
         {/* Current Phase */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base sm:text-lg">Current Phase</CardTitle>
+        <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Clock className="w-5 h-5 text-purple-600" />
+                Current Phase
+              </CardTitle>
+              <Badge variant="secondary" className="bg-purple-100 text-purple-700 px-3 py-1">
+                Live
+              </Badge>
+            </div>
           </CardHeader>
-          <CardContent className="pt-0">
-            <Badge variant="secondary" className="mb-3 sm:mb-4 text-xs sm:text-sm">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-              Public Sale
-            </Badge>
+          <CardContent className="pt-0 space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="text-center p-3 bg-white/60 rounded-lg">
+                <div className="text-lg font-bold text-purple-600">$0.10</div>
+                <div className="text-xs text-gray-600">Token Price</div>
+              </div>
+              <div className="text-center p-3 bg-white/60 rounded-lg">
+                <div className="text-lg font-bold text-purple-600">1B</div>
+                <div className="text-xs text-gray-600">Total Supply</div>
+              </div>
+            </div>
             
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Price</span>
-                <span className="font-semibold text-sm sm:text-base">$0.10</span>
+                <span className="text-sm text-gray-600">Funding Goal</span>
+                <span className="font-semibold">$12M</span>
               </div>
-              
               <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Total Supply</span>
-                <span className="font-semibold text-sm sm:text-base">1B WAM</span>
+                <span className="text-sm text-gray-600">Launch Timeline</span>
+                <span className="font-semibold text-purple-600">Q1 2026</span>
               </div>
-              
-              <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Funding Goal</span>
-                <span className="font-semibold text-sm sm:text-base">$12M</span>
+            </div>
+
+            {/* Security Info */}
+            <div className="pt-3 border-t border-purple-200">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-4 h-4 text-purple-600" />
+                <span className="text-sm font-medium text-purple-800">Secure & Transparent</span>
               </div>
-              
-              <div className="flex justify-between">
-                <span className="text-xs sm:text-sm text-gray-600">Launch Timeline</span>
-                <span className="font-semibold text-purple-600 text-sm sm:text-base">Q1 2026</span>
+              <div className="grid grid-cols-1 gap-1 text-xs text-purple-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-purple-500">🔒</span>
+                  <span>Multi-signature treasury</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-purple-500">🔒</span>
+                  <span>NGO-compliant allocation</span>
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Benefits */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
-              Token Benefits
+        <Card className="border-green-200 bg-gradient-to-br from-green-50 to-white shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-green-600" />
+              Community Benefits
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-0">
-            <ul className="space-y-2 text-xs sm:text-sm">
-              <li className="flex items-start gap-2">
-                <span className="text-green-500 mt-0.5">✓</span>
-                <span>Governance voting rights in community decisions</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-purple-500 mt-0.5">✓</span>
-                <span>Earn points through staking for community benefits</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-500 mt-0.5">✓</span>
-                <span>Access to bootcamps and educational programs</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-pink-500 mt-0.5">✓</span>
-                <span>Scholarship opportunities and conference tickets</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-teal-500 mt-0.5">✓</span>
-                <span>Volunteer camp participation and mentorship access</span>
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
+          <CardContent className="pt-0 space-y-4">
+            <div className="grid gap-2">
+              <div className="flex items-center gap-2 p-2 bg-white/60 rounded">
+                <span className="text-green-500 text-sm">✓</span>
+                <span className="text-sm">Governance voting rights</span>
+              </div>
+              <div className="flex items-center gap-2 p-2 bg-white/60 rounded">
+                <span className="text-purple-500 text-sm">✓</span>
+                <span className="text-sm">Educational programs access</span>
+              </div>
+              <div className="flex items-center gap-2 p-2 bg-white/60 rounded">
+                <span className="text-blue-500 text-sm">✓</span>
+                <span className="text-sm">Bootcamp & scholarship opportunities</span>
+              </div>
+              <div className="flex items-center gap-2 p-2 bg-white/60 rounded">
+                <span className="text-teal-500 text-sm">✓</span>
+                <span className="text-sm">Volunteer & mentorship programs</span>
+              </div>
+            </div>
 
-        {/* Security */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
-              Security
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <ul className="space-y-2 text-xs sm:text-sm">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-500 mt-0.5">🔒</span>
-                <span>Smart contract security audit planned</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-500 mt-0.5">🔒</span>
-                <span>Multi-signature treasury</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-500 mt-0.5">🔒</span>
-                <span>Transparent fund allocation</span>
-              </li>
-            </ul>
+            {/* Mission statement */}
+            <div className="pt-3 border-t border-green-200 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-2 bg-green-100 rounded-full">
+                <span className="text-green-600">💚</span>
+                <span className="text-sm font-medium text-green-800">Empowering Women's Rights</span>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

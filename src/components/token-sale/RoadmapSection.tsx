@@ -45,7 +45,7 @@ const roadmapPhases = [
     period: "Q4 2026 & Beyond",
     status: "future",
     items: [
-      "100+ funded projects milestone",
+      "4+ funded projects milestone",
       "Integration with major NGOs",
       "Educational platform launch",
       "Sustainable impact measurement"
