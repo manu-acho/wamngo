@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useAccount } from 'wagmi';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,6 +20,15 @@ interface ProposalForm {
 }
 
 export default function CreateProposal() {
+  // Get wallet address with error handling
+  let address = '';
+  try {
+    const { address: walletAddress } = useAccount();
+    address = walletAddress || '';
+  } catch (error) {
+    console.log('Wallet not connected');
+  }
+
   const [isCreating, setIsCreating] = useState(false);
   const [form, setForm] = useState<ProposalForm>({
     title: '',
@@ -33,21 +43,74 @@ export default function CreateProposal() {
   const categories = ['Health', 'Education', 'Agriculture', 'Technology', 'Governance', 'Other'];
   const projectTypes = ['AI/Health', 'AgTech/AI', 'Education/Tech', 'Web3/DeFi', 'Tokenomics', 'Infrastructure'];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Creating proposal:', form);
-    // Here you would integrate with smart contract
-    setIsCreating(false);
-    // Reset form
-    setForm({
-      title: '',
-      description: '',
-      category: '',
-      projectType: '',
-      fundingAmount: '',
-      duration: '',
-      milestones: ''
-    });
+    
+    try {
+      setIsCreating(true);
+      
+      // Validate required fields
+      if (!form.title || !form.description || !form.category || !form.fundingAmount) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Check if wallet is connected
+      if (!address) {
+        alert('Please connect your wallet to create a proposal');
+        return;
+      }
+
+      const proposalData = {
+        title: form.title,
+        description: form.description,
+        category: form.category,
+        fundingAmount: parseFloat(form.fundingAmount),
+        tokenAllocation: parseFloat(form.fundingAmount) * 0.1, // 10% token allocation
+        createdBy: address, // Use actual wallet address
+        votingDuration: 7 // Default 7 days
+      };
+
+      const response = await fetch('/api/governance/proposals', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(proposalData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Proposal created successfully:', result);
+        alert('Proposal created successfully!');
+        
+        // Reset form
+        setForm({
+          title: '',
+          description: '',
+          category: '',
+          projectType: '',
+          fundingAmount: '',
+          duration: '',
+          milestones: ''
+        });
+        setIsCreating(false);
+        
+        // Refresh the page to show the new proposal
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        const error = await response.json();
+        console.error('Error creating proposal:', error);
+        alert('Error creating proposal: ' + (error.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Error creating proposal:', error);
+      alert('Error creating proposal. Please try again.');
+    } finally {
+      setIsCreating(false);
+    }
   };
 
   const handleInputChange = (field: keyof ProposalForm, value: string) => {

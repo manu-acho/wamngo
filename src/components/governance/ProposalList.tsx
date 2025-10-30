@@ -1,14 +1,33 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAccount } from 'wagmi';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Vote, Clock, CheckCircle, XCircle, Users, Calendar, TrendingUp } from 'lucide-react';
 
+interface DatabaseProposal {
+  id: string;
+  title: string;
+  description: string;
+  category: string; // Maps to category field from DB
+  createdBy: string; // Maps to createdBy field from DB  
+  status: 'pending' | 'active' | 'passed' | 'rejected' | 'executed';
+  votingEndsAt: string | null;
+  fundingAmount: string | null;
+  tokenAllocation: string | null;
+  votesFor: number;
+  votesAgainst: number;
+  totalStakeFor: string;
+  totalStakeAgainst: string;
+  createdAt: string;
+  metadata: any;
+}
+
 interface Proposal {
-  id: number;
+  id: string;
   title: string;
   description: string;
   category: string;
@@ -23,82 +42,122 @@ interface Proposal {
   projectType: string;
 }
 
-const mockProposals: Proposal[] = [
-  {
-    id: 1,
-    title: "Fund AI-Powered Maternal Health System",
-    description: "Proposal to allocate $3M for developing a comprehensive AI-powered maternal health system. Voice-first AI providing real-time health guidance in native languages, deployable offline on edge devices.",
-    category: "Health",
-    creator: "Community",
-    status: "pending",
-    votesFor: 0,
-    votesAgainst: 0,
-    totalVotes: 0,
-    minVotes: 1000,
-    endDate: "Q1 2026",
-    fundingAmount: "$3,000,000",
-    projectType: "AI/Health"
-  },
-  {
-    id: 2,
-    title: "Smart Agricultural Advisory Network",
-    description: "AI-powered platform providing instant agricultural advice to smallholder farmers. Combining computer vision, weather prediction, and local knowledge to increase crop yields by 40%.",
-    category: "Agriculture",
-    creator: "Community",
-    status: "pending",
-    votesFor: 0,
-    votesAgainst: 0,
-    totalVotes: 0,
-    minVotes: 1000,
-    endDate: "Q1 2026",
-    fundingAmount: "$2,500,000",
-    projectType: "AgTech/AI"
-  },
-  {
-    id: 3,
-    title: "Digital Inclusion AI Platform",
-    description: "Multilingual AI platform to bridge the digital divide through culturally-aware services in health, education, and economic empowerment. Targeting 5M+ underserved users.",
-    category: "Education",
-    creator: "Community",
-    status: "pending",
-    votesFor: 0,
-    votesAgainst: 0,
-    totalVotes: 0,
-    minVotes: 1000,
-    endDate: "Q1 2026",
-    fundingAmount: "$1,800,000",
-    projectType: "Education/AI"
-  },
-  {
-    id: 4,
-    title: "Advanced Reconstruction Technology Scale-Up",
-    description: "Scale-up funding for advanced radio frequency technology for FGM survivor reconstruction. Expanding from pilot program to support 10,000 reconstructions across 20 treatment centers.",
-    category: "Health",
-    creator: "Community",
-    status: "pending",
-    votesFor: 0,
-    votesAgainst: 0,
-    totalVotes: 0,
-    minVotes: 1000,
-    endDate: "Q1 2026",
-    fundingAmount: "$4,000,000",
-    projectType: "Medical/Tech"
-  }
-];
+interface ProposalListProps {
+  initialProposals?: DatabaseProposal[];
+}
 
-export default function ProposalList() {
+export default function ProposalList({ initialProposals = [] }: ProposalListProps) {
+  // Initialize Web3 hooks conditionally
+  let address: string | undefined;
+  try {
+    const account = useAccount();
+    address = account.address;
+  } catch (error) {
+    // Not in wagmi context, address will be undefined
+    address = undefined;
+  }
+
+  const [proposals, setProposals] = useState<Proposal[]>([]);
+  const [loading, setLoading] = useState(!initialProposals.length);
+  const [voting, setVoting] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialProposals.length > 0) {
+      // Transform database proposals to component format
+      const transformedProposals = initialProposals.map(transformProposal);
+      setProposals(transformedProposals);
+      setLoading(false);
+    } else {
+      fetchProposals();
+    }
+  }, [initialProposals]);
+
+  const transformProposal = (dbProposal: DatabaseProposal): Proposal => {
+    // Handle wallet address with null check
+    const walletAddress = dbProposal.createdBy || '';
+    const formattedCreator = walletAddress ? 
+      `${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 4)}` : 
+      'Unknown';
+    
+    return {
+      id: dbProposal.id,
+      title: dbProposal.title,
+      description: dbProposal.description,
+      category: dbProposal.category,
+      creator: formattedCreator,
+      status: dbProposal.status === 'active' ? 'active' : 
+              dbProposal.status === 'passed' ? 'passed' : 'failed',
+      votesFor: dbProposal.votesFor || 0,
+      votesAgainst: dbProposal.votesAgainst || 0,
+      totalVotes: (dbProposal.votesFor || 0) + (dbProposal.votesAgainst || 0),
+      minVotes: 100, // Default value since not in DB schema
+      endDate: dbProposal.votingEndsAt ? new Date(dbProposal.votingEndsAt).toLocaleDateString() : 'TBD',
+      fundingAmount: dbProposal.fundingAmount ? `$${parseFloat(dbProposal.fundingAmount).toLocaleString()}` : undefined,
+      projectType: dbProposal.category || 'General', // Map category to projectType
+    };
+  };
+
+  const fetchProposals = async () => {
+    try {
+      const response = await fetch('/api/governance/proposals');
+      if (response.ok) {
+        const data = await response.json();
+        const transformedProposals = data.proposals.map(transformProposal);
+        setProposals(transformedProposals);
+      }
+    } catch (error) {
+      console.error('Error fetching proposals:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVote = async (proposalId: string, voteChoice: 'yes' | 'no' | 'abstain') => {
+    if (!address) return;
+    
+    setVoting(proposalId);
+    try {
+      const response = await fetch(`/api/governance/proposals/${proposalId}/vote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          walletAddress: address,
+          voteChoice,
+          votingPower: 1 // This would be calculated based on user's stake
+        })
+      });
+
+      if (response.ok) {
+        // Refresh proposals to show updated vote counts
+        await fetchProposals();
+        // Update local state to show user's vote
+        setUserVotes(prev => ({ ...prev, [proposalId]: voteChoice }));
+      }
+    } catch (error) {
+      console.error('Error voting:', error);
+    } finally {
+      setVoting(null);
+    }
+  };
+
   const [filter, setFilter] = useState<string>('all');
-  const [userVotes, setUserVotes] = useState<Record<number, 'for' | 'against' | null>>({});
+  const [userVotes, setUserVotes] = useState<Record<string, 'yes' | 'no' | 'abstain' | null>>({});
 
   const filteredProposals = filter === 'all' 
-    ? mockProposals 
-    : mockProposals.filter(p => p.status === filter);
+    ? proposals 
+    : proposals.filter(p => p.status === filter);
 
-  const handleVote = (proposalId: number, vote: 'for' | 'against') => {
-    setUserVotes(prev => ({ ...prev, [proposalId]: vote }));
-    // Here you would integrate with smart contract
-    console.log(`Voting ${vote} on proposal ${proposalId}`);
-  };
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="animate-pulse">
+            <div className="h-48 bg-gray-300 rounded-lg"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -217,36 +276,63 @@ export default function ProposalList() {
 
               {proposal.status === 'active' && (
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
-                  <div className="flex gap-2 flex-1">
-                    <Button
-                      onClick={() => handleVote(proposal.id, 'for')}
-                      variant={userVotes[proposal.id] === 'for' ? 'default' : 'outline'}
-                      className={`flex-1 ${userVotes[proposal.id] === 'for' ? 'bg-green-600 hover:bg-green-700' : 'hover:bg-green-50 hover:border-green-300'}`}
-                    >
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Vote For
-                    </Button>
-                    <Button
-                      onClick={() => handleVote(proposal.id, 'against')}
-                      variant={userVotes[proposal.id] === 'against' ? 'default' : 'outline'}
-                      className={`flex-1 ${userVotes[proposal.id] === 'against' ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-red-50 hover:border-red-300'}`}
-                    >
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Vote Against
-                    </Button>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <Calendar className="w-4 h-4" />
-                    <span>Ends {new Date(proposal.endDate).toLocaleDateString()}</span>
-                  </div>
+                  {!address ? (
+                    <div className="text-center p-4 bg-amber-50 rounded-lg border border-amber-200">
+                      <p className="text-sm font-medium text-amber-800 mb-1">Connect Wallet to Vote</p>
+                      <p className="text-xs text-amber-600">You need to connect your Web3 wallet to participate in governance voting.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex gap-2 flex-1">
+                        <Button
+                          onClick={() => handleVote(proposal.id, 'yes')}
+                          variant={userVotes[proposal.id] === 'yes' ? 'default' : 'outline'}
+                          className={`flex-1 ${userVotes[proposal.id] === 'yes' ? 'bg-green-600 hover:bg-green-700' : 'hover:bg-green-50 hover:border-green-300'}`}
+                          disabled={voting === proposal.id}
+                        >
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          {voting === proposal.id ? 'Voting...' : 'Vote Yes'}
+                        </Button>
+                        <Button
+                          onClick={() => handleVote(proposal.id, 'no')}
+                          variant={userVotes[proposal.id] === 'no' ? 'default' : 'outline'}
+                          className={`flex-1 ${userVotes[proposal.id] === 'no' ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-red-50 hover:border-red-300'}`}
+                          disabled={voting === proposal.id}
+                        >
+                          <XCircle className="w-4 h-4 mr-2" />
+                          {voting === proposal.id ? 'Voting...' : 'Vote No'}
+                        </Button>
+                        <Button
+                          onClick={() => handleVote(proposal.id, 'abstain')}
+                          variant={userVotes[proposal.id] === 'abstain' ? 'default' : 'outline'}
+                          className="flex-1"
+                          disabled={voting === proposal.id}
+                        >
+                          Abstain
+                        </Button>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <Calendar className="w-4 h-4" />
+                        <span>Ends {new Date(proposal.endDate).toLocaleDateString()}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
 
               {/* Vote Confirmation */}
               {userVotes[proposal.id] && (
-                <div className={`p-3 rounded-lg ${userVotes[proposal.id] === 'for' ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
-                  <p className={`text-sm font-medium ${userVotes[proposal.id] === 'for' ? 'text-green-800' : 'text-red-800'}`}>
-                    ✓ You voted {userVotes[proposal.id]?.toUpperCase()} this proposal
+                <div className={`p-3 rounded-lg ${
+                  userVotes[proposal.id] === 'yes' ? 'bg-green-50 border border-green-200' : 
+                  userVotes[proposal.id] === 'no' ? 'bg-red-50 border border-red-200' :
+                  'bg-gray-50 border border-gray-200'
+                }`}>
+                  <p className={`text-sm font-medium ${
+                    userVotes[proposal.id] === 'yes' ? 'text-green-800' : 
+                    userVotes[proposal.id] === 'no' ? 'text-red-800' :
+                    'text-gray-800'
+                  }`}>
+                    ✓ You voted {userVotes[proposal.id]?.toUpperCase()} on this proposal
                   </p>
                 </div>
               )}

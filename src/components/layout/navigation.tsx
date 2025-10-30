@@ -17,6 +17,7 @@ const navigationItems = [
 
 const moreItems = [
   { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
+  { href: "/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/donation", label: "Donate", icon: Heart },
   { href: "/fashion-for-hope", label: "Fashion For Hope", icon: Heart },
   { href: "/contact", label: "Contact", icon: Mail },

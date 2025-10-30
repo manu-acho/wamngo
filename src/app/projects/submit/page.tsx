@@ -38,6 +38,8 @@ export default function ProjectSubmit() {
 
   const [newTech, setNewTech] = useState("");
   const [newPartner, setNewPartner] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const categories = [
     { value: "health", label: "Health Technology" },
@@ -95,11 +97,60 @@ export default function ProjectSubmit() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Project submitted:", formData);
-    // Here you would send the data to your API
-    alert("Project proposal submitted for review!");
+    setSubmitting(true);
+
+    try {
+      const submissionData = {
+        title: formData.title,
+        description: formData.description,
+        shortDescription: formData.shortDescription,
+        category: formData.category,
+        fundingGoal: parseFloat(formData.fundingGoal),
+        tokenAllocation: parseFloat(formData.tokenAllocation),
+        technologyStack: formData.technologyStack,
+        partnerships: formData.partnerships,
+        impactGoals: formData.impactGoals,
+        submitterEmail: '', // This would come from user context
+        submitterName: ''   // This would come from user context
+      };
+
+      const response = await fetch('/api/projects/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData)
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        // Reset form
+        setFormData({
+          title: "",
+          description: "",
+          shortDescription: "",
+          category: "health",
+          fundingGoal: "",
+          tokenAllocation: "",
+          technologyStack: [],
+          partnerships: [],
+          impactGoals: {
+            primary: "",
+            users: "",
+            regions: ""
+          }
+        });
+      } else {
+        throw new Error('Failed to submit project');
+      }
+    } catch (error) {
+      console.error('Error submitting project:', error);
+      alert('Failed to submit project. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -336,10 +387,33 @@ export default function ProjectSubmit() {
 
             {/* Submit Button */}
             <div className="flex justify-center">
-              <Button type="submit" size="lg" className="w-full md:w-auto">
-                <Save className="mr-2 h-5 w-5" />
-                Submit Project Proposal
-              </Button>
+              {submitted ? (
+                <div className="text-center">
+                  <div className="mb-4 text-green-600 text-lg font-semibold">
+                    ✅ Project Submitted Successfully!
+                  </div>
+                  <p className="text-gray-600 mb-4">
+                    Your project proposal has been submitted for review. You'll be notified when it's approved for DAO voting.
+                  </p>
+                  <Button 
+                    type="button" 
+                    onClick={() => setSubmitted(false)}
+                    variant="outline"
+                  >
+                    Submit Another Project
+                  </Button>
+                </div>
+              ) : (
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="w-full md:w-auto"
+                  disabled={submitting}
+                >
+                  <Save className="mr-2 h-5 w-5" />
+                  {submitting ? 'Submitting...' : 'Submit Project Proposal'}
+                </Button>
+              )}
             </div>
           </form>
         </div>

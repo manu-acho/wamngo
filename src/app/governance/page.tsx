@@ -20,7 +20,20 @@ export const metadata: Metadata = {
 // Disable static generation for this page since it uses Web3 hooks
 export const dynamic = 'force-dynamic';
 
-export default function GovernancePage() {
+export default async function GovernancePage() {
+  // Fetch initial proposals from the database
+  let proposals = [];
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/governance/proposals?limit=5`, {
+      cache: 'no-store' // Ensure fresh data
+    });
+    if (response.ok) {
+      const data = await response.json();
+      proposals = data.proposals || [];
+    }
+  } catch (error) {
+    console.error('Error fetching proposals:', error);
+  }
   return (
     <Layout>
       <Web3Provider>
@@ -80,7 +93,7 @@ export default function GovernancePage() {
                       Preview the projects that will be available for community voting when our DAO launches in Q1 2026.
                     </p>
                   </div>
-                  <ProposalList />
+                  <ProposalList initialProposals={proposals} />
                 </TabsContent>
                 
                 <TabsContent value="create" className="space-y-6">

@@ -13,6 +13,7 @@ export default function TokenSaleInterface() {
   const [ethAmount, setEthAmount] = useState('');
   const [wamAmount, setWamAmount] = useState('');
   const [mounted, setMounted] = useState(false);
+  const [purchasing, setPurchasing] = useState(false);
   
   // Handle hydration
   useEffect(() => {
@@ -40,14 +41,54 @@ export default function TokenSaleInterface() {
     setEthAmount(ethNeeded.toFixed(6));
   };
 
-  const purchaseTokens = () => {
+  const purchaseTokens = async () => {
     if (!isConnected) {
       connectWallet();
       return;
     }
     
-    // Here you would integrate with smart contract
-    console.log('Purchasing tokens...', { ethAmount, wamAmount });
+    if (!ethAmount || !wamAmount) {
+      alert('Please enter a valid amount');
+      return;
+    }
+
+    setPurchasing(true);
+    
+    try {
+      // Record the purchase in the database
+      const response = await fetch('/api/tokens/purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          walletAddress: address,
+          amountEth: parseFloat(ethAmount),
+          amountTokens: parseFloat(wamAmount),
+          pricePerToken: WAM_PRICE
+        })
+      });
+
+      if (response.ok) {
+        const purchase = await response.json();
+        console.log('Purchase recorded:', purchase);
+        
+        // Here you would integrate with smart contract
+        // For now, just simulate the transaction
+        alert(`Purchase initiated! ${wamAmount} WAM tokens for ${ethAmount} ETH`);
+        
+        // Reset form
+        setEthAmount('');
+        setWamAmount('');
+      } else {
+        throw new Error('Failed to record purchase');
+      }
+    } catch (error) {
+      console.error('Error purchasing tokens:', error);
+      alert('Failed to initiate purchase. Please try again.');
+    } finally {
+      setPurchasing(false);
+    }
   };
 
   return (
@@ -143,9 +184,10 @@ export default function TokenSaleInterface() {
             <Button
               onClick={purchaseTokens}
               className="w-full h-10 sm:h-12 text-sm sm:text-lg"
-              disabled={!ethAmount || !wamAmount}
+              disabled={!ethAmount || !wamAmount || purchasing}
             >
-              {!isConnected ? 'Connect Wallet' : 'Purchase WAM Tokens'}
+              {!isConnected ? 'Connect Wallet' : 
+               purchasing ? 'Processing...' : 'Purchase WAM Tokens'}
             </Button>
 
             {/* Purchase Info */}
