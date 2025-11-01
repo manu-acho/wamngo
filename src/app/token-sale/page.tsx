@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Layout } from '@/components/layout/layout';
 import { Web3Provider } from '@/components/web3/Web3Provider';
+import { Button } from '@/components/ui/button';
 import TokenSaleWrapper from '@/components/token-sale/TokenSaleWrapper';
 import TokenomicsChart from '@/components/token-sale/TokenomicsChart';
 import RoadmapSection from '@/components/token-sale/RoadmapSection';
@@ -18,9 +19,9 @@ export default function TokenSalePage() {
   return (
     <Layout>
       <Web3Provider>
-    <div className="min-h-screen wam-gradient-surface">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-teal-50">
       {/* Hero Section */}
-      <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-white/80 via-purple-50/50 to-pink-50/80 backdrop-blur-sm">
         {/* Floating background elements - adjusted for mobile */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-32 sm:w-64 h-32 sm:h-64 rounded-full bg-gradient-to-r from-pink-400/20 to-purple-400/20 blur-3xl animate-pulse"></div>
@@ -34,13 +35,33 @@ export default function TokenSalePage() {
             Token Sale Coming Soon
           </div>
           
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 wam-text-gradient leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 wam-text-gradient leading-tight">
             WAMToken (WAM)
           </h1>
           
+          {/* Decorative horizontal bar */}
+          <div className="flex items-center justify-center mb-6 sm:mb-8">
+            <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent to-pink-400"></div>
+            <div className="mx-3 sm:mx-4 w-2 h-2 bg-gradient-to-r from-purple-400 to-teal-400 rounded-full animate-pulse"></div>
+            <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-r from-pink-400 to-purple-400"></div>
+            <div className="mx-2 sm:mx-3 w-1.5 h-1.5 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
+            <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-r from-purple-400 to-teal-400"></div>
+            <div className="mx-3 sm:mx-4 w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full animate-pulse animation-delay-1000"></div>
+            <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-teal-400 to-transparent"></div>
+          </div>
+          
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
-            Empower women's rights through blockchain technology. WAMToken will enable decentralized funding for our transformative projects with a $12M funding goal to maximize community-driven impact.
+            Accelerate women's digital inclusion and economic empowerment through innovative blockchain governance. WAMToken unlocks community-driven funding for transformative AI and technology projects, targeting $12M to scale solutions that create lasting impact for women worldwide.
           </p>
+          
+          {/* Visual separator before stats */}
+          <div className="flex items-center justify-center mb-8 sm:mb-12">
+            <div className="w-6 h-px bg-gradient-to-r from-transparent to-purple-300"></div>
+            <div className="mx-2 w-1 h-1 bg-purple-400 rounded-full"></div>
+            <div className="w-16 h-px bg-gradient-to-r from-purple-300 via-pink-300 to-teal-300"></div>
+            <div className="mx-2 w-1 h-1 bg-teal-400 rounded-full"></div>
+            <div className="w-6 h-px bg-gradient-to-r from-teal-300 to-transparent"></div>
+          </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto mb-8 sm:mb-12">
             <div className="wam-card p-4 sm:p-6">
@@ -61,6 +82,17 @@ export default function TokenSalePage() {
               <div className="text-xs sm:text-sm text-teal-600 mt-1">Current phase target</div>
             </div>
           </div>
+          
+          {/* Call-to-action buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <a 
+              href="#tokenomics" 
+              className="inline-flex items-center justify-center h-11 px-8 border-2 border-purple-300 bg-white/70 text-purple-700 hover:bg-purple-50 transition-all duration-200 rounded-md font-medium"
+            >
+              <span className="mr-2">📊</span>
+              View Tokenomics
+            </a>
+          </div>
         </div>
       </section>
 
@@ -72,7 +104,7 @@ export default function TokenSalePage() {
       </section>
 
       {/* Tokenomics */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
+      <section id="tokenomics" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold wam-text-gradient mb-4">Tokenomics</h2>

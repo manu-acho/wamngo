@@ -213,3 +213,52 @@ export const posts = pgTable('posts', {
     title: varchar({ length: 255 }).notNull(),
     content: text().notNull().default('')
 });
+
+// Partners system
+export const partners = pgTable('partners', {
+    id: uuid().primaryKey().defaultRandom(),
+    name: varchar({ length: 255 }).notNull(),
+    description: text().notNull(),
+    shortDescription: varchar({ length: 500 }),
+    capabilities: text(),
+    logoUrl: varchar({ length: 500 }),
+    websiteUrl: varchar({ length: 500 }),
+    contactEmail: varchar({ length: 255 }),
+    partnerType: varchar({ length: 50 }).notNull(), // technology, implementation, government, academic, infrastructure
+    status: varchar({ length: 20 }).notNull().default('active'), // active, inactive, pending
+    location: varchar({ length: 255 }),
+    establishedYear: integer(),
+    teamSize: varchar({ length: 50 }),
+    specialization: jsonb(), // Array of specialization areas
+    achievements: jsonb(), // Array of key achievements
+    projects: jsonb(), // Array of relevant projects
+    createdAt: timestamp().notNull().defaultNow(),
+    updatedAt: timestamp().notNull().defaultNow(),
+    // Admin fields for soft delete
+    deletedAt: timestamp(),
+    deletedBy: varchar({ length: 42 }),
+    deleteReason: text()
+});
+
+// Partner applications (for organizations wanting to become partners)
+export const partnerApplications = pgTable('partner_applications', {
+    id: uuid().primaryKey().defaultRandom(),
+    organizationName: varchar({ length: 255 }).notNull(),
+    contactName: varchar({ length: 255 }).notNull(),
+    contactEmail: varchar({ length: 255 }).notNull(),
+    websiteUrl: varchar({ length: 500 }),
+    organizationType: varchar({ length: 50 }).notNull(),
+    description: text().notNull(),
+    capabilities: text().notNull(),
+    motivation: text().notNull(),
+    location: varchar({ length: 255 }),
+    teamSize: varchar({ length: 50 }),
+    establishedYear: integer(),
+    previousExperience: text(),
+    status: varchar({ length: 20 }).notNull().default('pending'), // pending, approved, rejected
+    reviewedBy: varchar({ length: 42 }),
+    reviewedAt: timestamp(),
+    reviewNotes: text(),
+    createdAt: timestamp().notNull().defaultNow(),
+    updatedAt: timestamp().notNull().defaultNow()
+});

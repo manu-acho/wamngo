@@ -22,6 +22,13 @@
       "when": 1762000785805,
       "tag": "0002_dashing_red_ghost",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1762007721641,
+      "tag": "0003_bitter_malcolm_colcord",
+      "breakpoints": true
     }
   ]
 }

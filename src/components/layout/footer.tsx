@@ -11,8 +11,9 @@ export function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">WAM</h3>
             <p className="text-gray-300 mb-4">
-              Women Against Mutilations - Empowering women through awareness, 
-              support, and action against female genital mutilation.
+              Women Against Mutilations - Leveraging AI and blockchain technology 
+              to empower women and combat mutilations in all forms: social, economic, 
+              health, and educational barriers.
             </p>
             <div className="space-y-2">
               <div className="flex items-center text-sm text-gray-300">
@@ -62,8 +63,8 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Our Mission</h3>
             <p className="text-gray-300 text-sm mb-4">
               With special ECOSOC statute, WAM is a full member of UN which allows us 
-              to achieve our missions globally and make a difference in the fight 
-              against female genital mutilation.
+              to achieve our missions globally using innovative technology solutions 
+              to fight all forms of mutilations affecting women worldwide.
             </p>
                         <div className="text-center">
               <strong>UN Member</strong> • <strong>Over Two Decades Experience</strong>

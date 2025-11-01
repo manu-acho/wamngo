@@ -12,6 +12,7 @@
 | **DAO Governance** (`/governance`) | Community voting | Proposal creation, voting interface |
 | **Dashboard** (`/dashboard`) | User portfolio | Staking, rewards, voting history |
 | **Admin** (`/admin`) | Platform administration | Proposal/project management, analytics |
+| **Partners** (`/partners`) | Partnership showcase | Partner profiles, application form |
 | **About** (`/about`) | Organization details | Mission, founder story, team |
 | **Projects** (`/projects`) | Impact showcase | Funded projects and results |
 | **Contact** (`/contact`) | Community support | Contact form and information |
@@ -42,14 +43,14 @@ For detailed setup instructions, see [ADMIN_SETUP_GUIDE.md](ADMIN_SETUP_GUIDE.md
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
 [![Web3](https://img.shields.io/badge/Web3-Enabled-9333EA?style=flat-square)](https://web3js.org/)
 
-**WAM** is a revolutionary NGO platform that combines traditional humanitarian work with decentralized finance (DeFi) to create sustainable funding mechanisms for women's rights projects worldwide. Our blockchain-powered governance system enables transparent, community-driven funding decisions while maintaining the core mission of fighting female genital mutilation and supporting affected women.
+**WAM** is a revolutionary NGO platform that combines traditional humanitarian work with decentralized finance (DeFi) to create sustainable funding mechanisms for women's rights projects worldwide. Our blockchain-powered governance system enables transparent, community-driven funding decisions while maintaining the core mission of fostering women's inclusivity, empowerment, and breaking down barriers that prevent women from reaching their full potential.
 
 ---
 
 ## 🚀 **Platform Overview**
 
 ### **Mission-Driven DeFi Innovation**
-- **NGO Purpose**: Combat female genital mutilation and empower women globally
+- **NGO Purpose**: Foster women's inclusivity and empowerment globally through innovative technology solutions
 - **DeFi Integration**: Sustainable funding through tokenized governance
 - **Community Power**: Decentralized decision-making for project funding
 - **Transparent Impact**: Blockchain-verified fund allocation and results
@@ -276,15 +277,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 **Acknowledgments**
-
-- **Founder**: Amy Neff - Visionary leader combining humanitarian work with Web3 innovation
-- **Community**: All WAM token holders and governance participants
-- **Technology Partners**: Next.js, Tailwind CSS, RainbowKit, and the broader Web3 ecosystem
-- **Mission Partners**: Organizations worldwide fighting for women's rights
-
----
-
-**Built with ❤️ and 🔗 for women's rights worldwide**
 
 *WAM - Where DeFi meets humanitarian impact*

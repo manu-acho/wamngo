@@ -15,7 +15,9 @@ import {
   platformStats,
   userActions,
   adminRoles,
-  adminActions
+  adminActions,
+  partners,
+  partnerApplications
 } from '../../../db/schema';
 import { eq, desc, and, sql, count, isNull } from 'drizzle-orm';
 
@@ -748,6 +750,130 @@ export const adminService = {
       pendingProposals: pendingProposals.count,
       pendingSubmissions: pendingSubmissions.count,
       recentActions: recentActions.count
+    };
+  }
+};
+
+// Partner services
+export const partnerService = {
+  async getAllPartners() {
+    return await db
+      .select()
+      .from(partners)
+      .where(and(eq(partners.status, 'active'), isNull(partners.deletedAt)))
+      .orderBy(desc(partners.createdAt));
+  },
+
+  async getPartnerById(id: string) {
+    const [partner] = await db
+      .select()
+      .from(partners)
+      .where(and(eq(partners.id, id), isNull(partners.deletedAt)));
+    return partner;
+  },
+
+  async getPartnersByType(partnerType: string) {
+    return await db
+      .select()
+      .from(partners)
+      .where(and(
+        eq(partners.partnerType, partnerType), 
+        eq(partners.status, 'active'),
+        isNull(partners.deletedAt)
+      ))
+      .orderBy(desc(partners.createdAt));
+  },
+
+  async createPartner(data: typeof partners.$inferInsert) {
+    const [partner] = await db.insert(partners).values({
+      ...data,
+      updatedAt: new Date()
+    }).returning();
+    return partner;
+  },
+
+  async updatePartner(id: string, data: Partial<typeof partners.$inferInsert>) {
+    const [partner] = await db
+      .update(partners)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(partners.id, id))
+      .returning();
+    return partner;
+  },
+
+  async deletePartner(id: string, deletedBy: string, reason: string) {
+    const [partner] = await db
+      .update(partners)
+      .set({ 
+        deletedAt: new Date(),
+        deletedBy,
+        deleteReason: reason,
+        updatedAt: new Date()
+      })
+      .where(eq(partners.id, id))
+      .returning();
+    return partner;
+  },
+
+  // Partner Applications
+  async submitPartnerApplication(data: typeof partnerApplications.$inferInsert) {
+    const [application] = await db.insert(partnerApplications).values({
+      ...data,
+      updatedAt: new Date()
+    }).returning();
+    return application;
+  },
+
+  async getAllPartnerApplications(status?: string) {
+    const conditions = status ? [eq(partnerApplications.status, status)] : [];
+    
+    return await db
+      .select()
+      .from(partnerApplications)
+      .where(and(...conditions))
+      .orderBy(desc(partnerApplications.createdAt));
+  },
+
+  async getPartnerApplicationById(id: string) {
+    const [application] = await db
+      .select()
+      .from(partnerApplications)
+      .where(eq(partnerApplications.id, id));
+    return application;
+  },
+
+  async reviewPartnerApplication(id: string, status: 'approved' | 'rejected', reviewedBy: string, reviewNotes?: string) {
+    const [application] = await db
+      .update(partnerApplications)
+      .set({
+        status,
+        reviewedBy,
+        reviewedAt: new Date(),
+        reviewNotes,
+        updatedAt: new Date()
+      })
+      .where(eq(partnerApplications.id, id))
+      .returning();
+    return application;
+  },
+
+  async getPartnerStats() {
+    const [totalPartners] = await db.select({ count: count() }).from(partners).where(and(eq(partners.status, 'active'), isNull(partners.deletedAt)));
+    const [pendingApplications] = await db.select({ count: count() }).from(partnerApplications).where(eq(partnerApplications.status, 'pending'));
+    
+    const partnerTypes = await db
+      .select({
+        type: partners.partnerType,
+        count: count()
+      })
+      .from(partners)
+      .where(and(eq(partners.status, 'active'), isNull(partners.deletedAt)))
+      .groupBy(partners.partnerType);
+    
+    return {
+      totalPartners: totalPartners.count,
+      pendingApplications: pendingApplications.count,
+      partnerTypes
     };
   }
 };

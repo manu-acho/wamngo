@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useAccount } from "wagmi";
-import { Menu, X, Globe, Wallet, Zap, ChevronDown, Heart, Mail, BarChart3, Shield } from "lucide-react";
+import { Menu, X, Globe, Wallet, Zap, ChevronDown, Heart, Mail, BarChart3, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 
@@ -19,6 +19,7 @@ const navigationItems = [
 const moreItems = [
   { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
   { href: "/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/partners", label: "Partners", icon: Users },
   { href: "/admin", label: "Admin", icon: Shield, requiresAdmin: true },
   { href: "/donation", label: "Donate", icon: Heart },
   { href: "/fashion-for-hope", label: "Fashion For Hope", icon: Heart },
