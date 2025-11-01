@@ -1,3 +1,20 @@
+/* 
+  WAM Platform Global Styles
+  Using Tailwind CSS v4 with custom Web3 enhancements
+  
+  IMPORTANT: This file contains valid Tailwind CSS v4 directives that may show 
+  linting warnings in editors that don't recognize the new syntax:
+  - @custom-variant: Valid Tailwind CSS v4 custom variant directive
+  - @theme inline: Valid Tailwind CSS v4 theme configuration directive  
+  - @apply: Standard Tailwind utility application directive
+  
+  These warnings can be safely ignored as the code compiles and works correctly.
+  The application runs without errors and all styles render properly.
+*/
+
+/* stylelint-disable-file at-rule-no-unknown */
+/* postcss-disable-file */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -112,6 +129,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* stylelint-disable-file at-rule-no-unknown */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -130,6 +148,12 @@
   --wam-surface: #FEFBFF; /* Soft white */
   --wam-lavender: #F3F0FF; /* Light lavender */
   --wam-sage: #F0FDF4; /* Sage green */
+  
+  /* Web3 Enhancement Colors */
+  --wam-crypto-dark: #1a1a2e;
+  --wam-neon-purple: #b026ff;
+  --wam-neon-pink: #ff0080;
+  --wam-neon-cyan: #00ffff;
 }
 
 @layer components {
@@ -159,6 +183,91 @@
   .wam-card:hover {
     box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
     transform: translateY(-2px);
+  }
+  
+  /* Enhanced Glass-morphism Components */
+  .wam-glass-enhanced {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(139, 92, 246, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .wam-glass-enhanced:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 12px 40px rgba(139, 92, 246, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Web3 Hexagonal Background Pattern */
+  .wam-hex-pattern {
+    background-image: 
+      linear-gradient(30deg, rgba(139, 92, 246, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(139, 92, 246, 0.03) 87.5%, rgba(139, 92, 246, 0.03)),
+      linear-gradient(150deg, rgba(139, 92, 246, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(139, 92, 246, 0.03) 87.5%, rgba(139, 92, 246, 0.03)),
+      linear-gradient(30deg, rgba(236, 72, 153, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(236, 72, 153, 0.03) 87.5%, rgba(236, 72, 153, 0.03)),
+      linear-gradient(150deg, rgba(6, 182, 212, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(6, 182, 212, 0.03) 87.5%, rgba(6, 182, 212, 0.03));
+    background-size: 40px 70px;
+    background-position: 0 0, 0 0, 20px 35px, 20px 35px;
+  }
+  
+  /* Network/Node Connection Graphics */
+  .wam-network-bg {
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    position: relative;
+  }
+  
+  .wam-network-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(45deg, transparent 48%, rgba(139, 92, 246, 0.1) 49%, rgba(139, 92, 246, 0.1) 51%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(236, 72, 153, 0.1) 49%, rgba(236, 72, 153, 0.1) 51%, transparent 52%);
+    background-size: 100px 100px;
+    animation: network-pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  /* Node Connection Lines */
+  .wam-node {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .wam-node::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+    animation: pulse-line 3s ease-in-out infinite;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .wam-node::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.2), transparent);
+    animation: pulse-line 3s ease-in-out infinite 1.5s;
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
   
   /* Buttons */
@@ -196,6 +305,28 @@
     background-clip: text;
   }
   
+  /* Cryptographic/Hash-style Typography */
+  .wam-hash-text {
+    font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+    background: linear-gradient(45deg, #8B5CF6, #EC4899, #06B6D4);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: hash-gradient 4s ease infinite;
+    letter-spacing: 0.5px;
+  }
+  
+  .wam-address-text {
+    font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+    background: linear-gradient(90deg, #8B5CF6, #EC4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+  }
+  
   /* Navigation */
   .wam-nav-active {
     position: relative;
@@ -230,6 +361,26 @@
     100% { transform: translateX(100%); }
   }
   
+  @keyframes hash-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  @keyframes network-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+  
+  @keyframes pulse-line {
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) rotate(45deg) scaleX(0); }
+    50% { opacity: 1; transform: translate(-50%, -50%) rotate(45deg) scaleX(1); }
+  }
+  
+  @keyframes blockchain-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
   .wam-pulse { animation: wam-pulse 2s ease-in-out infinite; }
   .wam-float { animation: wam-float 3s ease-in-out infinite; }
   
@@ -256,5 +407,49 @@
     bottom: 0;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     animation: wam-shimmer 2s infinite;
+  }
+  
+  /* Blockchain-style Progress Bars */
+  .wam-blockchain-progress {
+    background: var(--wam-crypto-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+  
+  .wam-blockchain-progress::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 10px,
+      rgba(139, 92, 246, 0.1) 10px,
+      rgba(139, 92, 246, 0.1) 20px
+    );
+    z-index: 1;
+  }
+  
+  .wam-blockchain-fill {
+    background: linear-gradient(90deg, #8B5CF6, #EC4899);
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    transition: width 0.8s ease;
+  }
+  
+  .wam-blockchain-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: blockchain-pulse 1s ease-in-out infinite;
   }
 }

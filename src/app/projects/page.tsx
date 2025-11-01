@@ -222,7 +222,7 @@ export default function Projects() {
                       <span className="text-sm font-medium text-gray-700">
                         {project.fundingRaised ? "Funding Progress" : "Funding Target"}
                       </span>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-gray-600 wam-hash-text">
                         {project.fundingRaised 
                           ? `$${(project.fundingRaised / 1000000).toFixed(1)}M / $${((project.fundingTarget || project.fundingGoal) / 1000000).toFixed(1)}M`
                           : `Target: $${((project.fundingTarget || project.fundingGoal) / 1000000).toFixed(1)}M`

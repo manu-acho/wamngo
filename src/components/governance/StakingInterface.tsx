@@ -113,7 +113,7 @@ export default function StakingInterface() {
             <div className="w-12 h-12 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Coins className="h-6 w-6 text-purple-600" />
             </div>
-            <div className="text-2xl font-bold wam-text-gradient mb-1">
+            <div className="text-2xl font-bold wam-text-gradient mb-1 wam-hash-text">
               {totalStaked.toLocaleString()} WAM
             </div>
             <div className="text-gray-600 text-sm">Total Staked</div>
@@ -126,7 +126,7 @@ export default function StakingInterface() {
             <div className="w-12 h-12 bg-gradient-to-r from-green-100 to-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Award className="h-6 w-6 text-green-600" />
             </div>
-            <div className="text-2xl font-bold wam-text-gradient mb-1">
+            <div className="text-2xl font-bold wam-text-gradient mb-1 wam-hash-text">
               {totalPoints.toLocaleString()}
             </div>
             <div className="text-gray-600 text-sm">Total Points Earned</div>
@@ -139,7 +139,7 @@ export default function StakingInterface() {
             <div className="w-12 h-12 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Zap className="h-6 w-6 text-blue-600" />
             </div>
-            <div className="text-2xl font-bold wam-text-gradient mb-1">
+            <div className="text-2xl font-bold wam-text-gradient mb-1 wam-hash-text">
               {userBalance.toLocaleString()} WAM
             </div>
             <div className="text-gray-600 text-sm">Available Balance</div>
@@ -164,7 +164,7 @@ export default function StakingInterface() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold wam-text-gradient mb-1">
+                  <div className="text-3xl font-bold wam-text-gradient mb-1 wam-hash-text">
                     {pool.votingPowerMultiplier}x
                   </div>
                   <div className="text-gray-600 text-sm">Voting Power</div>
@@ -177,7 +177,7 @@ export default function StakingInterface() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Total Staked:</span>
-                    <span className="font-medium">{pool.totalStaked}</span>
+                    <span className="font-medium wam-hash-text">{pool.totalStaked}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Points/Day:</span>

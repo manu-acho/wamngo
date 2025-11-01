@@ -188,11 +188,11 @@ export default function UserDashboard() {
             <DollarSign className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold wam-text-gradient">
+            <div className="text-2xl font-bold wam-text-gradient wam-hash-text">
               ${userStats.portfolioValue.toLocaleString()}
             </div>
             <p className="text-xs text-gray-600 mt-1">
-              <span className="text-green-600">+12.5%</span> from last month
+              <span className="text-green-600 wam-hash-text">+12.5%</span> from last month
             </p>
           </CardContent>
         </Card>
@@ -203,7 +203,7 @@ export default function UserDashboard() {
             <Wallet className="h-4 w-4 text-pink-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold wam-text-gradient">
+            <div className="text-2xl font-bold wam-text-gradient wam-hash-text">
               {userStats.walletBalance.toLocaleString()} WAM
             </div>
             <p className="text-xs text-gray-600 mt-1">Available for staking/voting</p>
@@ -216,11 +216,11 @@ export default function UserDashboard() {
             <Gift className="h-4 w-4 text-teal-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold wam-text-gradient">
+            <div className="text-2xl font-bold wam-text-gradient wam-hash-text">
               {userStats.totalPoints.toLocaleString()}
             </div>
             <p className="text-xs text-gray-600 mt-1">
-              <span className="text-purple-600">+125</span> this week
+              <span className="text-purple-600 wam-hash-text">+125</span> this week
             </p>
           </CardContent>
         </Card>
@@ -231,11 +231,11 @@ export default function UserDashboard() {
             <Vote className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold wam-text-gradient">
+            <div className="text-2xl font-bold wam-text-gradient wam-hash-text">
               {userStats.votingPower.toLocaleString()}
             </div>
             <p className="text-xs text-gray-600 mt-1">
-              {userStats.proposalsVoted} proposals voted
+              <span className="wam-hash-text">{userStats.proposalsVoted}</span> proposals voted
             </p>
           </CardContent>
         </Card>
@@ -392,11 +392,11 @@ export default function UserDashboard() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div>
                         <p className="text-sm text-gray-600">Staked Amount</p>
-                        <p className="font-semibold">{position.amount.toLocaleString()} WAM</p>
+                        <p className="font-semibold wam-hash-text">{position.amount.toLocaleString()} WAM</p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Voting Power</p>
-                        <p className="font-semibold text-green-600">{position.votingMultiplier}x</p>
+                        <p className="font-semibold text-green-600 wam-hash-text">{position.votingMultiplier}x</p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Points Earned</p>

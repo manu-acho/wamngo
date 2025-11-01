@@ -19,9 +19,9 @@ export default function TokenSalePage() {
   return (
     <Layout>
       <Web3Provider>
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-teal-50 wam-hex-pattern">
       {/* Hero Section */}
-      <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-white/80 via-purple-50/50 to-pink-50/80 backdrop-blur-sm">
+      <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-white/80 via-purple-50/50 to-pink-50/80 backdrop-blur-sm wam-network-bg">
         {/* Floating background elements - adjusted for mobile */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-32 sm:w-64 h-32 sm:h-64 rounded-full bg-gradient-to-r from-pink-400/20 to-purple-400/20 blur-3xl animate-pulse"></div>
@@ -32,7 +32,7 @@ export default function TokenSalePage() {
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="mb-6 sm:mb-8 inline-flex items-center px-3 sm:px-4 py-2 rounded-full wam-card border-pink-200 text-sm sm:text-base">
             <span className="w-2 h-2 bg-pink-500 rounded-full mr-2 animate-pulse"></span>
-            Token Sale Coming Soon
+            <span className="wam-hash-text">Token Sale Coming Soon</span>
           </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 wam-text-gradient leading-tight">
@@ -64,22 +64,22 @@ export default function TokenSalePage() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto mb-8 sm:mb-12">
-            <div className="wam-card p-4 sm:p-6">
+            <div className="wam-glass-enhanced p-4 sm:p-6 wam-node">
               <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$0.10</div>
               <div className="text-gray-600 text-sm sm:text-base">Token Price</div>
-              <div className="text-xs sm:text-sm text-purple-600 mt-1">Current offering price</div>
+              <div className="text-xs sm:text-sm text-purple-600 mt-1 wam-hash-text">Current offering price</div>
             </div>
             
-            <div className="wam-card p-4 sm:p-6">
+            <div className="wam-glass-enhanced p-4 sm:p-6 wam-node">
               <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">1B</div>
               <div className="text-gray-600 text-sm sm:text-base">Total Supply</div>
-              <div className="text-xs sm:text-sm text-pink-600 mt-1">Fixed supply cap</div>
+              <div className="text-xs sm:text-sm text-pink-600 mt-1 wam-hash-text">Fixed supply cap</div>
             </div>
             
-            <div className="wam-card p-4 sm:p-6 sm:col-span-2 md:col-span-1">
+            <div className="wam-glass-enhanced p-4 sm:p-6 sm:col-span-2 md:col-span-1 wam-node">
               <div className="text-2xl sm:text-3xl font-bold wam-text-gradient mb-2">$12M</div>
               <div className="text-gray-600 text-sm sm:text-base">Funding Goal</div>
-              <div className="text-xs sm:text-sm text-teal-600 mt-1">Current phase target</div>
+              <div className="text-xs sm:text-sm text-teal-600 mt-1 wam-hash-text">Current phase target</div>
             </div>
           </div>
           

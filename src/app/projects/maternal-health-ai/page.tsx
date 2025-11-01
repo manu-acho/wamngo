@@ -167,12 +167,12 @@ export default function MaternalHealthAI() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between">
-                    <span>${(project.fundingRaised / 1000000).toFixed(1)}M Raised</span>
-                    <span>${(project.fundingGoal / 1000000).toFixed(1)}M Goal</span>
+                    <span><span className="wam-hash-text">${(project.fundingRaised / 1000000).toFixed(1)}M</span> Raised</span>
+                    <span><span className="wam-hash-text">${(project.fundingGoal / 1000000).toFixed(1)}M</span> Goal</span>
                   </div>
                   <Progress value={fundingProgress} className="h-3" />
                   <div className="text-center">
-                    <span className="text-2xl font-bold">{fundingProgress.toFixed(1)}%</span>
+                    <span className="text-2xl font-bold wam-hash-text">{fundingProgress.toFixed(1)}%</span>
                     <span className="text-sm text-red-200 block">Funded</span>
                   </div>
                 </CardContent>
@@ -186,7 +186,7 @@ export default function MaternalHealthAI() {
                       <Zap className="h-5 w-5 text-yellow-400" />
                       <span className="font-medium">WAMToken Allocation</span>
                     </div>
-                    <span className="text-xl font-bold">{(project.tokenAllocation / 1000000).toFixed(1)}M WAM</span>
+                    <span className="text-xl font-bold wam-hash-text">{(project.tokenAllocation / 1000000).toFixed(1)}M WAM</span>
                   </div>
                 </CardContent>
               </Card>
@@ -222,12 +222,12 @@ export default function MaternalHealthAI() {
             {project.currentMetrics.map((metric, index) => (
               <Card key={index}>
                 <CardContent className="p-6 text-center">
-                  <div className="text-2xl font-bold text-red-600 mb-2">
+                  <div className="text-2xl font-bold text-red-600 mb-2 wam-hash-text">
                     {metric.current.toLocaleString()}
                   </div>
                   <div className="text-sm text-gray-600 mb-2">{metric.name}</div>
                   <div className="text-xs text-gray-500">
-                    Target: {metric.target.toLocaleString()} {metric.unit}
+                    Target: <span className="wam-hash-text">{metric.target.toLocaleString()}</span> {metric.unit}
                   </div>
                   <Progress 
                     value={(metric.current / metric.target) * 100} 

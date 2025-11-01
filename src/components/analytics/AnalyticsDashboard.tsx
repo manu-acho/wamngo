@@ -142,10 +142,10 @@ export default function AnalyticsDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Users</p>
-                <p className="text-2xl font-bold wam-text-gradient">{analytics.totalUsers.toLocaleString()}</p>
+                <p className="text-2xl font-bold wam-text-gradient wam-hash-text">{analytics.totalUsers.toLocaleString()}</p>
                 <p className="text-xs text-green-600 flex items-center mt-1">
                   <ArrowUp className="w-3 h-3 mr-1" />
-                  +{analytics.activeUsers} active
+                  +<span className="wam-hash-text">{analytics.activeUsers}</span> active
                 </p>
               </div>
               <div className="p-3 bg-blue-100 rounded-full">
@@ -160,10 +160,10 @@ export default function AnalyticsDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Proposals</p>
-                <p className="text-2xl font-bold wam-text-gradient">{analytics.totalProposals}</p>
+                <p className="text-2xl font-bold wam-text-gradient wam-hash-text">{analytics.totalProposals}</p>
                 <p className="text-xs text-purple-600 flex items-center mt-1">
                   <Activity className="w-3 h-3 mr-1" />
-                  {analytics.activeProposals} active
+                  <span className="wam-hash-text">{analytics.activeProposals}</span> active
                 </p>
               </div>
               <div className="p-3 bg-purple-100 rounded-full">
@@ -178,7 +178,7 @@ export default function AnalyticsDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Votes</p>
-                <p className="text-2xl font-bold wam-text-gradient">{analytics.totalVotes.toLocaleString()}</p>
+                <p className="text-2xl font-bold wam-text-gradient wam-hash-text">{analytics.totalVotes.toLocaleString()}</p>
                 <p className="text-xs text-green-600 flex items-center mt-1">
                   <TrendingUp className="w-3 h-3 mr-1" />
                   Active governance
@@ -196,7 +196,7 @@ export default function AnalyticsDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Token Volume</p>
-                <p className="text-2xl font-bold wam-text-gradient">${analytics.totalVolume.toLocaleString()}</p>
+                <p className="text-2xl font-bold wam-text-gradient wam-hash-text">${analytics.totalVolume.toLocaleString()}</p>
                 <p className="text-xs text-yellow-600 flex items-center mt-1">
                   <DollarSign className="w-3 h-3 mr-1" />
                   {analytics.totalTokensPurchased.toLocaleString()} tokens
@@ -224,7 +224,7 @@ export default function AnalyticsDashboard() {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm font-medium">Passed</span>
-                  <span className="text-sm text-gray-600">{analytics.proposalStats.passed}</span>
+                  <span className="text-sm text-gray-600 wam-hash-text">{analytics.proposalStats.passed}</span>
                 </div>
                 <Progress 
                   value={(analytics.proposalStats.passed / analytics.totalProposals) * 100} 
@@ -235,7 +235,7 @@ export default function AnalyticsDashboard() {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm font-medium">Active</span>
-                  <span className="text-sm text-gray-600">{analytics.proposalStats.active}</span>
+                  <span className="text-sm text-gray-600 wam-hash-text">{analytics.proposalStats.active}</span>
                 </div>
                 <Progress 
                   value={(analytics.proposalStats.active / analytics.totalProposals) * 100} 
@@ -246,7 +246,7 @@ export default function AnalyticsDashboard() {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm font-medium">Rejected</span>
-                  <span className="text-sm text-gray-600">{analytics.proposalStats.rejected}</span>
+                  <span className="text-sm text-gray-600 wam-hash-text">{analytics.proposalStats.rejected}</span>
                 </div>
                 <Progress 
                   value={(analytics.proposalStats.rejected / analytics.totalProposals) * 100} 

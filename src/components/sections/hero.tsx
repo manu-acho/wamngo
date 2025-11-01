@@ -37,7 +37,7 @@ function AnimatedTitle() {
 export function HeroSection() {
   return (
     <section className="relative bg-gradient-to-br from-purple-900 via-pink-800 to-teal-900 text-white overflow-hidden">
-      {/* Animated background elements */}
+      {/* Simplified background elements - no hex pattern */}
       <div className="absolute inset-0 bg-black/10"></div>
       <div className="absolute top-20 left-10 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl wam-float"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl wam-float" style={{animationDelay: '1s'}}></div>
@@ -45,9 +45,9 @@ export function HeroSection() {
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
         <div className="text-center relative z-10">
-          <div className="mb-6 inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90">
+          <div className="mb-6 inline-flex items-center px-4 py-2 rounded-full wam-glass-enhanced border border-white/20 text-white/90">
             <Heart className="w-4 h-4 mr-2 text-pink-300" />
-            Empowering Women Through Technology
+            <span className="text-white">Empowering Women Through Technology</span>
           </div>
           
           <AnimatedTitle />
@@ -131,23 +131,23 @@ export function MissionSection() {
 export function StatsSection() {
   return (
     <section className="py-16 bg-gradient-to-r from-purple-900 via-pink-800 to-teal-900 text-white relative overflow-hidden">
-      {/* Background elements */}
+      {/* Simplified background elements */}
       <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl wam-pulse"></div>
       <div className="absolute bottom-10 right-10 w-24 h-24 bg-pink-400/20 rounded-full blur-xl wam-pulse" style={{animationDelay: '1s'}}></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="wam-card bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-            <div className="text-4xl font-bold mb-2 wam-text-gradient bg-white text-transparent bg-clip-text">UN Member</div>
+          <div className="wam-glass-enhanced p-6 rounded-2xl border border-white/20">
+            <div className="text-4xl font-bold mb-2 text-white">UN Member</div>
             <p className="text-purple-100">Special ECOSOC Status</p>
           </div>
-          <div className="wam-card bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-            <div className="text-4xl font-bold mb-2 wam-text-gradient bg-white text-transparent bg-clip-text">20+</div>
-            <p className="text-purple-100">Years of Dedication</p>
+          <div className="wam-glass-enhanced p-6 rounded-2xl border border-white/20">
+            <div className="text-4xl font-bold mb-2 text-white">$12M</div>
+            <p className="text-purple-100">Funding Goal</p>
           </div>
-          <div className="wam-card bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-            <div className="text-4xl font-bold mb-2 wam-text-gradient bg-white text-transparent bg-clip-text">200M+</div>
-            <p className="text-purple-100">Women Affected Worldwide</p>
+          <div className="wam-glass-enhanced p-6 rounded-2xl border border-white/20">
+            <div className="text-4xl font-bold mb-2 text-white">5M+</div>
+            <p className="text-purple-100">Lives to Impact</p>
           </div>
         </div>
       </div>

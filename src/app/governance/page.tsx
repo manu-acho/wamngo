@@ -37,13 +37,13 @@ export default async function GovernancePage() {
   return (
     <Layout>
       <Web3Provider>
-        <div className="min-h-screen wam-gradient-surface">
+        <div className="min-h-screen wam-gradient-surface wam-hex-pattern">
           {/* Hero Section */}
-          <section className="pt-24 pb-16 px-4">
+          <section className="pt-24 pb-16 px-4 wam-network-bg">
             <div className="max-w-7xl mx-auto text-center">
-              <div className="mb-8 inline-flex items-center px-4 py-2 rounded-full wam-card border-purple-200">
+              <div className="mb-8 inline-flex items-center px-4 py-2 rounded-full wam-glass-enhanced border-purple-200">
                 <Vote className="w-4 h-4 mr-2 text-purple-600" />
-                DAO Governance Platform
+                <span className="wam-hash-text">DAO Governance Platform</span>
               </div>
               
               <h1 className="text-5xl md:text-6xl font-bold mb-6 wam-text-gradient pb-2">
@@ -58,19 +58,19 @@ export default async function GovernancePage() {
                 <div className="wam-card p-6 text-center">
                   <div className="text-3xl font-bold wam-text-gradient mb-2">Q1 2026</div>
                   <div className="text-gray-600">DAO Launch</div>
-                  <div className="text-sm text-purple-600 mt-1">Governance goes live</div>
+                  <div className="text-sm text-purple-600 mt-1 wam-hash-text">Governance goes live</div>
                 </div>
                 
                 <div className="wam-card p-6 text-center">
                   <div className="text-3xl font-bold wam-text-gradient mb-2">4</div>
                   <div className="text-gray-600">Projects Ready</div>
-                  <div className="text-sm text-pink-600 mt-1">Awaiting community funding</div>
+                  <div className="text-sm text-pink-600 mt-1 wam-hash-text">Awaiting community funding</div>
                 </div>
                 
                 <div className="wam-card p-6 text-center">
-                  <div className="text-3xl font-bold wam-text-gradient mb-2">$11.3M</div>
+                  <div className="text-3xl font-bold wam-text-gradient mb-2 wam-hash-text">$11.3M</div>
                   <div className="text-gray-600">Total Project Funding</div>
-                  <div className="text-sm text-teal-600 mt-1">Required for all initiatives</div>
+                  <div className="text-sm text-teal-600 mt-1 wam-hash-text">Required for all initiatives</div>
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default async function GovernancePage() {
                   <div className="space-y-3 mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Funding Requested</span>
-                      <span className="font-semibold">$185,000</span>
+                      <span className="font-semibold wam-hash-text">$185,000</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Projected Impact</span>
@@ -247,7 +247,7 @@ export default async function GovernancePage() {
                   <div className="space-y-3 mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Funding Requested</span>
-                      <span className="font-semibold">$120,000</span>
+                      <span className="font-semibold wam-hash-text">$120,000</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Projected Impact</span>

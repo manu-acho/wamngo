@@ -95,7 +95,7 @@ export default function TokenSaleInterface() {
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
       {/* Main Purchase Interface */}
       <div className="lg:col-span-3">
-        <Card className="p-4 sm:p-6 h-fit sticky top-24">
+        <Card className="p-4 sm:p-6 h-fit sticky top-24 wam-glass-enhanced">
           <CardHeader className="px-0 pt-0">
             <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
               <Wallet className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -108,12 +108,14 @@ export default function TokenSaleInterface() {
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Sale Progress</span>
-                <span>0% Complete</span>
+                <span className="wam-hash-text">0% Complete</span>
               </div>
-              <Progress value={0} className="h-2 sm:h-3" key="progress-bar-0" />
+              <div className="wam-blockchain-progress h-3 sm:h-4" key="progress-bar-0">
+                <div className="wam-blockchain-fill" style={{width: '0%'}}></div>
+              </div>
               <div className="flex justify-between text-xs text-gray-500">
                 <span>$0 Raised</span>
-                <span>Goal: $12M</span>
+                <span className="wam-hash-text">Goal: $12M</span>
               </div>
             </div>
 
@@ -132,16 +134,16 @@ export default function TokenSaleInterface() {
                 </Button>
               </div>
             ) : (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 wam-glass-enhanced">
                 <div className="flex items-center gap-2 mb-2">
                   <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                   <span className="font-medium text-green-800 text-sm sm:text-base">Wallet Connected</span>
                 </div>
-                <p className="text-green-700 text-xs sm:text-sm">
+                <p className="text-green-700 text-xs sm:text-sm wam-address-text">
                   {address?.slice(0, 6)}...{address?.slice(-4)}
                 </p>
                 {balance && (
-                  <p className="text-green-700 text-xs sm:text-sm">
+                  <p className="text-green-700 text-xs sm:text-sm wam-hash-text">
                     Balance: {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
                   </p>
                 )}
@@ -172,9 +174,9 @@ export default function TokenSaleInterface() {
                   placeholder="0"
                   value={wamAmount}
                   onChange={(e) => handleWamChange(e.target.value)}
-                  className="text-sm sm:text-base"
+                  className="text-sm sm:text-base wam-hash-text"
                 />
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 wam-hash-text">
                   @ $0.10 per token
                 </p>
               </div>
@@ -203,14 +205,14 @@ export default function TokenSaleInterface() {
       {/* Sale Information Sidebar */}
       <div className="lg:col-span-2 space-y-6">
         {/* Current Phase */}
-        <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white shadow-sm hover:shadow-md transition-shadow">
+        <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white shadow-sm hover:shadow-md transition-shadow wam-glass-enhanced wam-node">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Clock className="w-5 h-5 text-purple-600" />
                 Current Phase
               </CardTitle>
-              <Badge variant="secondary" className="bg-purple-100 text-purple-700 px-3 py-1">
+              <Badge variant="secondary" className="bg-purple-100 text-purple-700 px-3 py-1 wam-hash-text">
                 Live
               </Badge>
             </div>

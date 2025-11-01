@@ -275,7 +275,7 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
                         {proposal.category}
                       </Badge>
                       {proposal.fundingAmount && (
-                        <Badge variant="outline" className="text-green-600 border-green-200">
+                        <Badge variant="outline" className="text-green-600 border-green-200 wam-hash-text">
                           {proposal.fundingAmount}
                         </Badge>
                       )}
@@ -332,11 +332,11 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
                   <div className="flex justify-between text-sm">
                     <span className="flex items-center gap-1">
                       <TrendingUp className="w-4 h-4 text-green-600" />
-                      For: {proposal.votesFor.toLocaleString()}
+                      For: <span className="wam-hash-text">{proposal.votesFor.toLocaleString()}</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <TrendingUp className="w-4 h-4 text-red-600 rotate-180" />
-                      Against: {proposal.votesAgainst.toLocaleString()}
+                      Against: <span className="wam-hash-text">{proposal.votesAgainst.toLocaleString()}</span>
                     </span>
                   </div>
 
@@ -346,8 +346,8 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
                   />
 
                   <div className="flex justify-between text-xs text-gray-500">
-                    <span>{proposal.totalVotes.toLocaleString()} total votes</span>
-                    <span>Min required: {proposal.minVotes.toLocaleString()}</span>
+                    <span><span className="wam-hash-text">{proposal.totalVotes.toLocaleString()}</span> total votes</span>
+                    <span>Min required: <span className="wam-hash-text">{proposal.minVotes.toLocaleString()}</span></span>
                   </div>
                 </div>
               )}
