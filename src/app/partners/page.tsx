@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Layout } from '@/components/layout/layout';
 import { 
   ExternalLink, 
   Mail, 
@@ -102,23 +103,26 @@ export default function PartnersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <div className="container mx-auto px-4 py-8">
-          <div className="animate-pulse space-y-8">
-            <div className="h-8 bg-gray-200 rounded w-1/3"></div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-64 bg-gray-200 rounded-lg"></div>
-              ))}
+      <Layout>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+          <div className="container mx-auto px-4 py-8">
+            <div className="animate-pulse space-y-8">
+              <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-64 bg-gray-200 rounded-lg"></div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <Layout>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -392,6 +396,7 @@ export default function PartnersPage() {
           }}
         />
       )}
-    </div>
+      </div>
+    </Layout>
   );
 }
