@@ -15,6 +15,13 @@
       "when": 1761586632623,
       "tag": "0001_late_miss_america",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1762000785805,
+      "tag": "0002_dashing_red_ghost",
+      "breakpoints": true
     }
   ]
 }

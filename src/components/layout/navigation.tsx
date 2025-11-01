@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Globe, Wallet, Zap, ChevronDown, Heart, Mail, BarChart3 } from "lucide-react";
+import { useAccount } from "wagmi";
+import { Menu, X, Globe, Wallet, Zap, ChevronDown, Heart, Mail, BarChart3, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 
@@ -18,6 +19,7 @@ const navigationItems = [
 const moreItems = [
   { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
   { href: "/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/admin", label: "Admin", icon: Shield, requiresAdmin: true },
   { href: "/donation", label: "Donate", icon: Heart },
   { href: "/fashion-for-hope", label: "Fashion For Hope", icon: Heart },
   { href: "/contact", label: "Contact", icon: Mail },
@@ -26,7 +28,44 @@ const moreItems = [
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
+  
+  // Get wallet address for admin check
+  let address: string | undefined;
+  try {
+    const account = useAccount();
+    address = account.address;
+  } catch (error) {
+    address = undefined;
+  }
+
+  useEffect(() => {
+    checkAdminStatus();
+  }, [address]);
+
+  const checkAdminStatus = async () => {
+    if (!address) {
+      setIsAdmin(false);
+      return;
+    }
+    
+    try {
+      const response = await fetch('/api/admin/dashboard', {
+        headers: {
+          'X-Wallet-Address': address,
+        },
+      });
+      
+      if (response.ok) {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    } catch (error) {
+      setIsAdmin(false);
+    }
+  };
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -106,7 +145,9 @@ export function Navigation() {
                 {/* Dropdown Menu */}
                 {isMoreOpen && (
                   <div className="absolute right-0 mt-3 w-64 wam-card p-1 z-50">
-                    {moreItems.map((item) => {
+                    {moreItems
+                      .filter(item => !item.requiresAdmin || isAdmin)
+                      .map((item) => {
                       const Icon = item.icon;
                       const active = isActive(item.href);
                       
@@ -125,6 +166,7 @@ export function Navigation() {
                         >
                           <Icon className={`w-4 h-4 ${active ? 'text-purple-500' : 'text-gray-500 group-hover:text-purple-500'}`} />
                           {item.label}
+                          {item.requiresAdmin && <Shield className="w-3 h-3 text-purple-500 ml-auto" />}
                         </Link>
                       );
                     })}
@@ -211,28 +253,30 @@ export function Navigation() {
                 <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">
                   More
                 </div>
-                {moreItems.map((item) => {
-                  const active = isActive(item.href);
-                  const Icon = item.icon;
-                  
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`
-                        flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200
-                        ${active 
-                          ? 'text-blue-600 bg-blue-50' 
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                        }
-                      `}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <Icon className="w-4 h-4" />
-                      {item.label}
-                    </Link>
-                  );
-                })}
+                {moreItems
+                  .filter(item => !item.requiresAdmin || isAdmin)
+                  .map((item) => {
+                    const active = isActive(item.href);
+                    const Icon = item.icon;
+                    
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`
+                          flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200
+                          ${active 
+                            ? 'text-blue-600 bg-blue-50' 
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                          }
+                        `}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {item.label}
+                      </Link>
+                    );
+                  })}
               </div>
               
               {/* Mobile Wallet Connect */}

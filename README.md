@@ -1,7 +1,43 @@
 # 🌍 WAM - Women Against Mutilations
 ### A DeFi-Powered NGO Platform for Women's Rights
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?sty---
+
+## 📋 **Platform Pages**
+
+| Page | Purpose | Features |
+|------|---------|----------|
+| **Home** (`/`) | Mission overview and token sale | Hero section, project showcase |
+| **Token Sale** (`/token-sale`) | WAM token purchase | Web3 integration, tokenomics |
+| **DAO Governance** (`/governance`) | Community voting | Proposal creation, voting interface |
+| **Dashboard** (`/dashboard`) | User portfolio | Staking, rewards, voting history |
+| **Admin** (`/admin`) | Platform administration | Proposal/project management, analytics |
+| **About** (`/about`) | Organization details | Mission, founder story, team |
+| **Projects** (`/projects`) | Impact showcase | Funded projects and results |
+| **Contact** (`/contact`) | Community support | Contact form and information |
+
+---
+
+## 🛡️ **Admin System**
+
+The WAM platform includes a comprehensive admin system for platform management:
+
+### **Features**
+- **Proposal Management**: Create, edit, delete, and manage all proposals
+- **Project Oversight**: Monitor funded projects and milestones
+- **User Management**: Assign admin roles and permissions
+- **Audit Logging**: Complete trail of all admin actions
+- **Analytics Dashboard**: Platform statistics and insights
+- **Role-Based Access**: Multiple admin permission levels
+
+### **Quick Setup**
+1. Run database migrations: `npm run db:generate && npm run db:migrate`
+2. Add admin role to your wallet address in the database
+3. Connect wallet and access admin features via navigation
+
+For detailed setup instructions, see [ADMIN_SETUP_GUIDE.md](ADMIN_SETUP_GUIDE.md)
+
+---logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
 [![Web3](https://img.shields.io/badge/Web3-Enabled-9333EA?style=flat-square)](https://web3js.org/)

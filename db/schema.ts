@@ -29,7 +29,11 @@ export const proposals = pgTable('proposals', {
     votesAgainst: integer().default(0),
     totalStakeFor: decimal({ precision: 18, scale: 2 }).default('0'),
     totalStakeAgainst: decimal({ precision: 18, scale: 2 }).default('0'),
-    metadata: jsonb()
+    metadata: jsonb(),
+    // Admin fields for soft delete
+    deletedAt: timestamp(),
+    deletedBy: varchar({ length: 42 }),
+    deleteReason: text()
 });
 
 export const votes = pgTable('votes', {
@@ -51,6 +55,28 @@ export const daoMembers = pgTable('dao_members', {
     isActive: boolean().default(true)
 });
 
+// Admin and role management
+export const adminRoles = pgTable('admin_roles', {
+    id: uuid().primaryKey().defaultRandom(),
+    walletAddress: varchar({ length: 42 }).notNull().unique(),
+    role: varchar({ length: 20 }).notNull(), // 'super_admin', 'moderator', 'reviewer'
+    permissions: jsonb(),
+    grantedBy: varchar({ length: 42 }),
+    grantedAt: timestamp().notNull().defaultNow(),
+    isActive: boolean().default(true)
+});
+
+export const adminActions = pgTable('admin_actions', {
+    id: uuid().primaryKey().defaultRandom(),
+    adminWallet: varchar({ length: 42 }).notNull(),
+    actionType: varchar({ length: 50 }).notNull(), // 'delete_proposal', 'edit_project', etc.
+    targetType: varchar({ length: 20 }).notNull(), // 'proposal', 'project', 'user'
+    targetId: varchar({ length: 100 }),
+    reason: text(),
+    metadata: jsonb(),
+    createdAt: timestamp().notNull().defaultNow()
+});
+
 // Project management
 export const projects = pgTable('projects', {
     id: uuid().primaryKey().defaultRandom(),
@@ -67,7 +93,11 @@ export const projects = pgTable('projects', {
     createdAt: timestamp().notNull().defaultNow(),
     updatedAt: timestamp().notNull().defaultNow(),
     imageUrl: varchar({ length: 500 }),
-    metadata: jsonb()
+    metadata: jsonb(),
+    // Admin fields for soft delete
+    deletedAt: timestamp(),
+    deletedBy: varchar({ length: 42 }),
+    deleteReason: text()
 });
 
 export const projectSubmissions = pgTable('project_submissions', {

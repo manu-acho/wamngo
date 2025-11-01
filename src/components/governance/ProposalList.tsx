@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Vote, Clock, CheckCircle, XCircle, Users, Calendar, TrendingUp } from 'lucide-react';
+import EditProposalModal from '@/components/admin/EditProposalModal';
 
 interface DatabaseProposal {
   id: string;
@@ -58,6 +59,8 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
   }
 
   const [proposals, setProposals] = useState<Proposal[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [editingProposal, setEditingProposal] = useState<string | null>(null);
   const [loading, setLoading] = useState(!initialProposals.length);
   const [voting, setVoting] = useState<string | null>(null);
 
@@ -70,7 +73,12 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
     } else {
       fetchProposals();
     }
-  }, [initialProposals]);
+    
+    // Check admin status
+    if (address) {
+      checkAdminStatus();
+    }
+  }, [initialProposals, address]);
 
   const transformProposal = (dbProposal: DatabaseProposal): Proposal => {
     // Handle wallet address with null check
@@ -110,6 +118,61 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
     } finally {
       setLoading(false);
     }
+  };
+
+  const checkAdminStatus = async () => {
+    if (!address) return;
+    
+    try {
+      const response = await fetch('/api/admin/dashboard', {
+        headers: {
+          'X-Wallet-Address': address,
+        },
+      });
+      
+      if (response.ok) {
+        setIsAdmin(true);
+      }
+    } catch (error) {
+      console.error('Error checking admin status:', error);
+    }
+  };
+
+  const deleteProposal = async (proposalId: string) => {
+    if (!address || !isAdmin) return;
+    
+    const reason = prompt('Please provide a reason for deletion (optional):');
+    
+    try {
+      const response = await fetch(`/api/admin/proposals/${proposalId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Wallet-Address': address,
+        },
+        body: JSON.stringify({ reason }),
+      });
+      
+      if (response.ok) {
+        // Remove from local state
+        setProposals(proposals.filter(p => p.id !== proposalId));
+        alert('Proposal deleted successfully');
+      } else {
+        alert('Failed to delete proposal');
+      }
+    } catch (error) {
+      console.error('Error deleting proposal:', error);
+      alert('Error deleting proposal');
+    }
+  };
+
+  const handleEditProposal = (proposalId: string, updatedData: any) => {
+    // Update the proposal in local state
+    setProposals(proposals.map(p => 
+      p.id === proposalId 
+        ? { ...p, ...updatedData, fundingAmount: updatedData.fundingAmount ? `$${parseFloat(updatedData.fundingAmount).toLocaleString()}` : undefined }
+        : p
+    ));
   };
 
   const handleVote = async (proposalId: string, voteChoice: 'yes' | 'no' | 'abstain') => {
@@ -201,17 +264,43 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
           <Card key={proposal.id} className="wam-card hover:shadow-lg transition-shadow">
             <CardHeader>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge className={getStatusColor(proposal.status)}>
-                      {getStatusIcon(proposal.status)}
-                      <span className="ml-1">{proposal.status.toUpperCase()}</span>
-                    </Badge>
-                    <Badge variant="outline">{proposal.category}</Badge>
-                    {proposal.fundingAmount && (
-                      <Badge variant="outline" className="text-green-600 border-green-200">
-                        {proposal.fundingAmount}
+                                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <Badge className={getStatusColor(proposal.status)}>
+                        {getStatusIcon(proposal.status)}
+                        <span className="ml-1 capitalize">{proposal.status}</span>
                       </Badge>
+                      <Badge variant="outline" className="text-xs">
+                        {proposal.category}
+                      </Badge>
+                      {proposal.fundingAmount && (
+                        <Badge variant="outline" className="text-green-600 border-green-200">
+                          {proposal.fundingAmount}
+                        </Badge>
+                      )}
+                    </div>
+                    
+                    {/* Admin Controls */}
+                    {isAdmin && (
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setEditingProposal(proposal.id)}
+                          className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => deleteProposal(proposal.id)}
+                          className="text-red-600 border-red-200 hover:bg-red-50"
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     )}
                   </div>
                   <CardTitle className="text-lg sm:text-xl wam-text-gradient">
@@ -340,6 +429,16 @@ export default function ProposalList({ initialProposals = [] }: ProposalListProp
           </Card>
         ))}
       </div>
+
+      {/* Edit Proposal Modal */}
+      {editingProposal && address && (
+        <EditProposalModal
+          proposal={proposals.find(p => p.id === editingProposal)!}
+          onClose={() => setEditingProposal(null)}
+          onSave={handleEditProposal}
+          userWallet={address}
+        />
+      )}
     </div>
   );
 }

@@ -13,7 +13,9 @@ import {
   contactSubmissions,
   notifications,
   platformStats,
-  userActions
+  userActions,
+  adminRoles,
+  adminActions
 } from '../../../db/schema';
 import { eq, desc, and, sql, count, isNull } from 'drizzle-orm';
 
@@ -100,11 +102,18 @@ export const governanceService = {
   },
 
   async getProposals(status?: string) {
-    const query = db.select().from(proposals);
     if (status) {
-      return await query.where(eq(proposals.status, status));
+      return await db
+        .select()
+        .from(proposals)
+        .where(and(eq(proposals.status, status), isNull(proposals.deletedAt)))
+        .orderBy(desc(proposals.createdAt));
     }
-    return await query.orderBy(desc(proposals.createdAt));
+    return await db
+      .select()
+      .from(proposals)
+      .where(isNull(proposals.deletedAt))
+      .orderBy(desc(proposals.createdAt));
   },
 
   async getProposal(id: string) {
@@ -250,7 +259,11 @@ export const projectService = {
   },
 
   async getProjects() {
-    return await db.select().from(projects).orderBy(desc(projects.createdAt));
+    return await db
+      .select()
+      .from(projects)
+      .where(isNull(projects.deletedAt))
+      .orderBy(desc(projects.createdAt));
   },
 
   async getProject(slug: string) {
@@ -516,5 +529,225 @@ export const analyticsService = {
         sql`${users.lastActive} <= ${endDate.toISOString()}`
       ));
     return result.count;
+  }
+};
+
+// Admin services
+export const adminService = {
+  async createAdminRole(data: {
+    walletAddress: string;
+    role: 'super_admin' | 'moderator' | 'reviewer';
+    permissions?: any;
+    grantedBy: string;
+  }) {
+    const [adminRole] = await db.insert(adminRoles).values(data).returning();
+    
+    // Log the action
+    await this.logAdminAction({
+      adminWallet: data.grantedBy,
+      actionType: 'grant_admin_role',
+      targetType: 'user',
+      targetId: data.walletAddress,
+      metadata: { role: data.role, permissions: data.permissions }
+    });
+    
+    return adminRole;
+  },
+
+  async getAdminRole(walletAddress: string) {
+    const [role] = await db
+      .select()
+      .from(adminRoles)
+      .where(and(
+        eq(adminRoles.walletAddress, walletAddress),
+        eq(adminRoles.isActive, true)
+      ));
+    return role;
+  },
+
+  async isAdmin(walletAddress: string): Promise<boolean> {
+    const role = await this.getAdminRole(walletAddress);
+    return !!role;
+  },
+
+  async hasPermission(walletAddress: string, permission: string): Promise<boolean> {
+    const role = await this.getAdminRole(walletAddress);
+    if (!role) return false;
+    
+    // Super admin has all permissions
+    if (role.role === 'super_admin') return true;
+    
+    // Check specific permissions
+    const permissions = role.permissions as any;
+    return permissions && permissions[permission] === true;
+  },
+
+  async revokeAdminRole(walletAddress: string, revokedBy: string) {
+    const [role] = await db
+      .update(adminRoles)
+      .set({ isActive: false })
+      .where(eq(adminRoles.walletAddress, walletAddress))
+      .returning();
+    
+    // Log the action
+    await this.logAdminAction({
+      adminWallet: revokedBy,
+      actionType: 'revoke_admin_role',
+      targetType: 'user',
+      targetId: walletAddress,
+      metadata: { previousRole: role?.role }
+    });
+    
+    return role;
+  },
+
+  async getAllAdmins() {
+    return await db
+      .select()
+      .from(adminRoles)
+      .where(eq(adminRoles.isActive, true))
+      .orderBy(desc(adminRoles.grantedAt));
+  },
+
+  async logAdminAction(data: {
+    adminWallet: string;
+    actionType: string;
+    targetType: string;
+    targetId?: string;
+    reason?: string;
+    metadata?: any;
+  }) {
+    const [action] = await db.insert(adminActions).values(data).returning();
+    return action;
+  },
+
+  async getAdminActions(adminWallet?: string, limit = 50) {
+    const query = db.select().from(adminActions);
+    if (adminWallet) {
+      return await query
+        .where(eq(adminActions.adminWallet, adminWallet))
+        .orderBy(desc(adminActions.createdAt))
+        .limit(limit);
+    }
+    return await query
+      .orderBy(desc(adminActions.createdAt))
+      .limit(limit);
+  },
+
+  async updateProposal(id: string, data: {
+    title?: string;
+    description?: string;
+    fundingAmount?: string;
+    tokenAllocation?: string;
+    category?: string;
+    status?: string;
+  }, adminWallet: string) {
+    const [proposal] = await db
+      .update(proposals)
+      .set(data)
+      .where(eq(proposals.id, id))
+      .returning();
+    
+    // Log the action
+    await this.logAdminAction({
+      adminWallet,
+      actionType: 'edit_proposal',
+      targetType: 'proposal',
+      targetId: id,
+      metadata: data
+    });
+    
+    return proposal;
+  },
+
+  async deleteProposal(id: string, adminWallet: string, reason?: string) {
+    const [proposal] = await db
+      .update(proposals)
+      .set({
+        deletedAt: new Date(),
+        deletedBy: adminWallet,
+        deleteReason: reason
+      })
+      .where(eq(proposals.id, id))
+      .returning();
+    
+    // Log the action
+    await this.logAdminAction({
+      adminWallet,
+      actionType: 'delete_proposal',
+      targetType: 'proposal',
+      targetId: id,
+      reason,
+      metadata: { title: proposal?.title }
+    });
+    
+    return proposal;
+  },
+
+  async updateProject(id: string, data: {
+    title?: string;
+    description?: string;
+    shortDescription?: string;
+    category?: string;
+    status?: string;
+    fundingGoal?: string;
+    imageUrl?: string;
+  }, adminWallet: string) {
+    const [project] = await db
+      .update(projects)
+      .set(data)
+      .where(eq(projects.id, id))
+      .returning();
+    
+    // Log the action
+    await this.logAdminAction({
+      adminWallet,
+      actionType: 'edit_project',
+      targetType: 'project',
+      targetId: id,
+      metadata: data
+    });
+    
+    return project;
+  },
+
+  async deleteProject(id: string, adminWallet: string, reason?: string) {
+    const [project] = await db
+      .update(projects)
+      .set({
+        deletedAt: new Date(),
+        deletedBy: adminWallet,
+        deleteReason: reason
+      })
+      .where(eq(projects.id, id))
+      .returning();
+    
+    // Log the action
+    await this.logAdminAction({
+      adminWallet,
+      actionType: 'delete_project',
+      targetType: 'project',
+      targetId: id,
+      reason,
+      metadata: { title: project?.title }
+    });
+    
+    return project;
+  },
+
+  async getAdminDashboardStats() {
+    const [totalProposals] = await db.select({ count: count() }).from(proposals).where(isNull(proposals.deletedAt));
+    const [totalProjects] = await db.select({ count: count() }).from(projects).where(isNull(projects.deletedAt));
+    const [pendingProposals] = await db.select({ count: count() }).from(proposals).where(and(eq(proposals.status, 'pending'), isNull(proposals.deletedAt)));
+    const [pendingSubmissions] = await db.select({ count: count() }).from(projectSubmissions).where(eq(projectSubmissions.status, 'submitted'));
+    const [recentActions] = await db.select({ count: count() }).from(adminActions).where(sql`${adminActions.createdAt} > NOW() - INTERVAL '24 hours'`);
+    
+    return {
+      totalProposals: totalProposals.count,
+      totalProjects: totalProjects.count,
+      pendingProposals: pendingProposals.count,
+      pendingSubmissions: pendingSubmissions.count,
+      recentActions: recentActions.count
+    };
   }
 };
