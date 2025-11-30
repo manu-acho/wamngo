@@ -10,9 +10,4 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Neon plugin configuration - use permanent database, not anonymous
-[[plugins]]
-  package = "neon"
-  [plugins.inputs]
-    # Skip anonymous database warnings since we're using a permanent database
-    skip_expiry_check = true
+# Note: Neon plugin is configured via Netlify UI and uses NETLIFY_DATABASE_URL environment variable
