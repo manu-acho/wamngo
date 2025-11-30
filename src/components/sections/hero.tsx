@@ -9,8 +9,8 @@ import { useState, useEffect } from "react";
 function AnimatedTitle() {
   const [currentText, setCurrentText] = useState(0);
   const texts = [
-    { primary: "Women Against", secondary: "Mutilations" },
-    { primary: "Safe Guarding Women", secondary: "Against Violence" }
+    { primary: "Breaking Barriers", secondary: "with Technology" },
+    { primary: "Building Futures", secondary: "for Women" }
   ];
 
   useEffect(() => {
@@ -22,12 +22,11 @@ function AnimatedTitle() {
   }, []);
 
   return (
-    <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-      <span className="wam-text-gradient transition-all duration-1000 ease-in-out">
+    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight max-w-5xl mx-auto">
+      <span className="wam-text-gradient transition-all duration-1000 ease-in-out block">
         {texts[currentText].primary}
       </span>
-      <br />
-      <span className="text-white transition-all duration-1000 ease-in-out">
+      <span className="text-white transition-all duration-1000 ease-in-out block mt-2">
         {texts[currentText].secondary}
       </span>
     </h1>
